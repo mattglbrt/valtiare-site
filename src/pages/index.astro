@@ -12,20 +12,34 @@ const rest = posts.slice(1);
 
 <BaseLayout>
   <section class="relative mx-auto flex min-h-[70vh] max-w-5xl flex-col items-center justify-center px-6 py-24 text-center">
-    <p class="mb-6 font-sans text-xs uppercase tracking-[0.32em] text-stone-500">
+    <div class="embers" aria-hidden="true">
+      <span style="left: 8%;  --ember-duration: 22s; --ember-delay: 0s;    --ember-drift: 18px;"></span>
+      <span style="left: 14%; --ember-duration: 17s; --ember-delay: 4s;    --ember-drift: -22px;"></span>
+      <span style="left: 22%; --ember-duration: 25s; --ember-delay: 2.5s;  --ember-drift: 30px;"></span>
+      <span style="left: 31%; --ember-duration: 19s; --ember-delay: 7s;    --ember-drift: -14px;"></span>
+      <span style="left: 42%; --ember-duration: 28s; --ember-delay: 1.5s;  --ember-drift: 22px;"></span>
+      <span style="left: 49%; --ember-duration: 21s; --ember-delay: 9s;    --ember-drift: -18px;"></span>
+      <span style="left: 58%; --ember-duration: 24s; --ember-delay: 3s;    --ember-drift: 26px;"></span>
+      <span style="left: 67%; --ember-duration: 20s; --ember-delay: 6s;    --ember-drift: -24px;"></span>
+      <span style="left: 76%; --ember-duration: 26s; --ember-delay: 0.5s;  --ember-drift: 16px;"></span>
+      <span style="left: 84%; --ember-duration: 18s; --ember-delay: 5s;    --ember-drift: -28px;"></span>
+      <span style="left: 92%; --ember-duration: 23s; --ember-delay: 8s;    --ember-drift: 20px;"></span>
+    </div>
+
+    <p class="relative mb-6 font-sans text-xs uppercase tracking-[0.32em] text-stone-500">
       A whimsydark universe
     </p>
 
-    <h1 class="heading-rule font-display text-5xl md:text-7xl text-parchment-50">
+    <h1 class="relative heading-rule font-display text-5xl md:text-7xl text-parchment-50">
       Valtiare
     </h1>
 
-    <p class="mt-10 max-w-xl font-serif text-lg italic text-parchment-100/90">
+    <p class="relative mt-10 max-w-xl font-serif text-lg italic text-parchment-100/90">
       A candlelit cabinet of curiosities. An illuminated bestiary from a
       collapsed library. Dark stories told with warm hands.
     </p>
 
-    <OrnamentalDivider class="mt-12 w-48 text-brass-600" />
+    <OrnamentalDivider class="relative mt-12 w-48 text-brass-600" />
   </section>
 
   {featured && (

@@ -25,6 +25,7 @@ const featured = await getPostsForCharacter(character.id);
 <BaseLayout
   title={`${data.name} — Valtiare`}
   description={data.description}
+  image={data.portrait?.src}
 >
   <article>
     <header class="mx-auto max-w-5xl px-6 pt-20">
