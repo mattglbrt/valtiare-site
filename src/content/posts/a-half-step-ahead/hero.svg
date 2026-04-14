@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1b1c17"/>
+      <stop offset="50%" stop-color="#14110e"/>
+      <stop offset="100%" stop-color="#0e0d0b"/>
+    </linearGradient>
+    <radialGradient id="clearing" cx="50%" cy="62%" r="42%">
+      <stop offset="0%" stop-color="#ffd9a0" stop-opacity="0.22"/>
+      <stop offset="30%" stop-color="#a68d42" stop-opacity="0.12"/>
+      <stop offset="70%" stop-color="#3a2418" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#0e0d0b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#sky)"/>
+  <rect width="100%" height="100%" fill="url(#clearing)"/>
+
+  <!-- ring of trees around a clearing -->
+  <g fill="#0a0c08">
+    <path d="M0 900 L0 80 L40 60 L80 160 L130 40 L170 180 L220 80 L260 200 L300 120 L330 260 L370 160 L400 900 Z"/>
+    <path d="M400 900 L420 340 L450 380 L470 900 Z"/>
+    <path d="M1600 900 L1600 80 L1560 60 L1520 160 L1470 40 L1430 180 L1380 80 L1340 200 L1300 120 L1270 260 L1230 160 L1200 900 Z"/>
+    <path d="M1200 900 L1180 340 L1150 380 L1130 900 Z"/>
+    <path d="M560 900 L580 280 L610 320 L630 900 Z"/>
+    <path d="M1040 900 L1020 280 L990 320 L970 900 Z"/>
+  </g>
+  <g fill="#141713" opacity="0.82">
+    <path d="M470 900 L490 480 L515 510 L530 900 Z"/>
+    <path d="M1130 900 L1110 480 L1085 510 L1070 900 Z"/>
+    <path d="M660 900 L675 520 L695 545 L705 900 Z"/>
+    <path d="M940 900 L925 520 L905 545 L895 900 Z"/>
+  </g>
+
+  <!-- three figures in the clearing — spaced, quiet -->
+
+  <!-- Triste (center-left, slender, cool shimmer) -->
+  <g transform="translate(720 620)">
+    <path d="M-32 -10 Q-28 -130 0 -140 Q28 -130 32 -10 L44 220 L-44 220 Z"
+          fill="#14110e" stroke="#6b5d3e" stroke-width="1"/>
+    <ellipse cx="0" cy="-108" rx="16" ry="22" fill="#0e0d0b"/>
+    <circle cx="-4" cy="-104" r="1" fill="#c0d4c4"/>
+    <circle cx="4"  cy="-104" r="1" fill="#c0d4c4"/>
+    <g fill="#c0d4c4" opacity="0.4">
+      <circle cx="-28" cy="-40" r="1"/>
+      <circle cx="30" cy="-20" r="1"/>
+      <circle cx="-24" cy="80" r="1"/>
+      <circle cx="28" cy="100" r="1"/>
+    </g>
+  </g>
+
+  <!-- Garrin (just behind Triste, broader) -->
+  <g transform="translate(660 640)">
+    <path d="M-36 -10 Q-32 -130 0 -140 Q32 -130 36 -10 L52 200 L-52 200 Z"
+          fill="#14110e" stroke="#6b5d3e" stroke-width="1"/>
+    <ellipse cx="0" cy="-108" rx="20" ry="24" fill="#0e0d0b"/>
+  </g>
+
+  <!-- Thorek (center-right, stocky) -->
+  <g transform="translate(900 680)">
+    <path d="M-42 -10 Q-36 -100 0 -108 Q36 -100 42 -10 L56 140 L-56 140 Z"
+          fill="#14110e" stroke="#6b5d3e" stroke-width="1"/>
+    <ellipse cx="0" cy="-78" rx="22" ry="24" fill="#0e0d0b"/>
+    <!-- doll at throat -->
+    <g transform="translate(0 -32)">
+      <rect x="-5" y="-1" width="10" height="12" fill="#7a2e3b"/>
+      <circle cx="0" cy="-5" r="4" fill="#7a2e3b"/>
+    </g>
+  </g>
+
+  <!-- Rollo (small, to Thorek's side, looking up) -->
+  <g transform="translate(970 720)">
+    <path d="M-18 -4 Q-16 -52 0 -56 Q16 -52 18 -4 L24 100 L-24 100 Z"
+          fill="#14110e" stroke="#6b5d3e" stroke-width="1"/>
+    <ellipse cx="0" cy="-38" rx="10" ry="12" fill="#1a1714"/>
+    <circle cx="-4" cy="-36" r="1.5" fill="#d4c9a8"/>
+    <circle cx="4"  cy="-36" r="1.5" fill="#d4c9a8"/>
+  </g>
+
+  <!-- shaft of light falling into the clearing -->
+  <path d="M760 0 L820 0 L880 900 L800 900 Z"
+        fill="#ffd9a0" opacity="0.04"/>
+</svg>
