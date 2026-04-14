@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <defs>
+    <radialGradient id="cavern" cx="50%" cy="55%" r="75%">
+      <stop offset="0%" stop-color="#1a1c22"/>
+      <stop offset="60%" stop-color="#0d0f12"/>
+      <stop offset="100%" stop-color="#0a0a09"/>
+    </radialGradient>
+    <linearGradient id="shaft" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#ffd9a0" stop-opacity="0.85"/>
+      <stop offset="55%" stop-color="#a68d42" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#3a2418" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="pool" cx="50%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#ffd9a0" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#14110e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#cavern)"/>
+
+  <g fill="#0a0a08">
+    <path d="M0 0 L0 120 L80 160 L160 100 L240 180 L320 120 L400 160 L480 100 L560 140 L640 80 L720 140 L800 100 L880 170 L960 110 L1040 160 L1120 100 L1200 140 L1200 0 Z"/>
+  </g>
+
+  <path d="M540 40 L660 40 L760 700 L440 700 Z" fill="url(#shaft)"/>
+
+  <g fill="#c0d4e4" opacity="0.65">
+    <circle cx="180" cy="240" r="1.4"/>
+    <circle cx="260" cy="320" r="1.8"/>
+    <circle cx="340" cy="260" r="1.2"/>
+    <circle cx="140" cy="400" r="1.6"/>
+    <circle cx="280" cy="420" r="1.2"/>
+    <circle cx="980" cy="280" r="1.4"/>
+    <circle cx="1060" cy="360" r="1.8"/>
+    <circle cx="900" cy="430" r="1.2"/>
+    <circle cx="1040" cy="460" r="1.4"/>
+    <circle cx="860" cy="320" r="1.2"/>
+  </g>
+  <g fill="#c0d4e4" opacity="0.2">
+    <circle cx="180" cy="240" r="6"/>
+    <circle cx="260" cy="320" r="8"/>
+    <circle cx="980" cy="280" r="6"/>
+    <circle cx="1060" cy="360" r="8"/>
+  </g>
+
+  <ellipse cx="600" cy="700" rx="460" ry="70" fill="url(#pool)"/>
+
+  <g fill="#0e0e10">
+    <path d="M0 700 L0 600 L120 560 L220 610 L320 540 L440 600 L520 700 Z"/>
+    <path d="M1200 700 L1200 600 L1080 560 L980 610 L880 540 L760 600 L680 700 Z"/>
+  </g>
+
+  <text x="600" y="120" text-anchor="middle" fill="#d4c9a8"
+        font-family="Georgia, serif" font-size="44" font-style="italic" letter-spacing="6">
+    Kraaz'Duun
+  </text>
+</svg>
