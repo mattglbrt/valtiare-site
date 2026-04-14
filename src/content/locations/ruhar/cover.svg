@@ -1,49 +1,69 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#1a1c18"/>
-      <stop offset="60%" stop-color="#111310"/>
-      <stop offset="100%" stop-color="#0e0d0b"/>
+      <stop offset="0%" stop-color="#1a201a"/>
+      <stop offset="45%" stop-color="#121610"/>
+      <stop offset="100%" stop-color="#0a0c09"/>
     </linearGradient>
-    <radialGradient id="moon" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#2b332b"/>
-      <stop offset="70%" stop-color="#16191a" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#14110e" stop-opacity="0"/>
+    <radialGradient id="warm" cx="50%" cy="58%" r="55%">
+      <stop offset="0%" stop-color="#4a6b58" stop-opacity="0.28"/>
+      <stop offset="60%" stop-color="#3a5a4a" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#0a0c09" stop-opacity="0"/>
     </radialGradient>
   </defs>
+
   <rect width="100%" height="100%" fill="url(#sky)"/>
+  <rect width="100%" height="100%" fill="url(#warm)"/>
 
-  <circle cx="960" cy="130" r="70" fill="url(#moon)"/>
-  <circle cx="960" cy="130" r="22" fill="#1f2722" opacity="0.7"/>
-
-  <g fill="#a68d42" opacity="0.45">
-    <circle cx="160" cy="80"  r="1.2"/>
-    <circle cx="320" cy="60"  r="1"/>
-    <circle cx="520" cy="100" r="1.4"/>
-    <circle cx="700" cy="70"  r="1"/>
+  <g fill="#a68d42" opacity="0.35">
+    <circle cx="160" cy="60"  r="1"/>
+    <circle cx="500" cy="50"  r="1.2"/>
+    <circle cx="880" cy="70"  r="1"/>
     <circle cx="1120" cy="90" r="1.2"/>
   </g>
 
-  <g fill="#0a0c08">
-    <path d="M0 700 L0 440 L60 360 L110 480 L170 340 L220 500 L280 360 L340 490 L400 320 L460 470 L520 340 L580 490 L640 320 L700 470 L760 340 L820 500 L880 320 L940 470 L1000 360 L1060 490 L1120 340 L1200 440 L1200 700 Z"/>
+  <g fill="#07090a">
+    <path d="M0 700 L0 200 L60 80 L120 240 L180 100 L240 260 L300 120 L360 240 L420 140 L480 260 L540 120 L600 240 L660 100 L720 260 L780 140 L840 260 L900 120 L960 240 L1020 140 L1080 260 L1140 120 L1200 220 L1200 700 Z"/>
   </g>
 
-  <g fill="#131612" opacity="0.85">
-    <path d="M0 700 L60 560 L120 610 L180 540 L240 600 L300 540 L360 590 L420 540 L480 590 L540 540 L600 600 L660 540 L720 600 L780 540 L840 590 L900 540 L960 590 L1020 550 L1080 600 L1140 540 L1200 580 L1200 700 Z"/>
+  <g fill="#0f1510" opacity="0.92">
+    <path d="M0 700 L20 360 L60 420 L100 360 L150 420 L200 360 L250 430 L300 380 L350 440 L400 380 L450 440 L500 370 L550 440 L600 380 L650 450 L700 380 L750 440 L800 370 L850 440 L900 380 L950 440 L1000 380 L1050 450 L1100 380 L1150 440 L1200 400 L1200 700 Z"/>
   </g>
 
-  <g stroke="#2b332b" stroke-width="1" fill="none" opacity="0.4">
-    <path d="M80 450 Q120 440 140 460"/>
-    <path d="M200 430 Q240 420 260 440"/>
-    <path d="M880 430 Q920 420 940 440"/>
+  <g fill="#131a13" opacity="0.9">
+    <path d="M0 700 L40 520 L90 560 L140 520 L200 570 L260 520 L320 560 L380 520 L440 570 L500 520 L560 560 L620 520 L680 580 L740 520 L800 560 L860 520 L920 560 L980 520 L1040 570 L1100 520 L1160 560 L1200 540 L1200 700 Z"/>
   </g>
 
-  <text x="600" y="150" text-anchor="middle" fill="#d4c9a8"
-        font-family="Georgia, serif" font-size="52" font-style="italic" letter-spacing="8">
+  <g stroke="#3a5a4a" stroke-width="1.2" fill="none" opacity="0.65">
+    <path d="M80 430 Q120 410 150 440 Q180 460 220 430"/>
+    <path d="M300 460 Q340 440 380 470 Q420 490 460 460"/>
+    <path d="M540 440 Q580 420 620 450 Q660 470 700 440"/>
+    <path d="M780 460 Q820 440 860 470 Q900 490 940 460"/>
+    <path d="M1000 440 Q1040 420 1080 450 Q1120 470 1160 440"/>
+  </g>
+
+  <g stroke="#4a6b58" stroke-width="0.8" fill="none" opacity="0.5">
+    <path d="M60 580 Q110 560 160 580 Q210 600 260 580"/>
+    <path d="M340 600 Q390 580 440 600 Q490 620 540 600"/>
+    <path d="M620 580 Q670 560 720 580 Q770 600 820 580"/>
+    <path d="M900 600 Q950 580 1000 600 Q1050 620 1100 600"/>
+  </g>
+
+  <g fill="#ffd9a0" opacity="0.55">
+    <circle cx="220" cy="450" r="1"/>
+    <circle cx="460" cy="440" r="1.2"/>
+    <circle cx="720" cy="450" r="1"/>
+    <circle cx="960" cy="440" r="1"/>
+    <circle cx="380" cy="580" r="0.9"/>
+    <circle cx="860" cy="590" r="0.9"/>
+  </g>
+
+  <text x="600" y="140" text-anchor="middle" fill="#d4c9a8"
+        font-family="Georgia, serif" font-size="50" font-style="italic" letter-spacing="8">
     Ruhar
   </text>
-  <text x="600" y="195" text-anchor="middle" fill="#7a7468"
-        font-family="Georgia, serif" font-size="16" letter-spacing="3">
-    the forest that finds the wounded
+  <text x="600" y="185" text-anchor="middle" fill="#7a7468"
+        font-family="Georgia, serif" font-size="15" letter-spacing="3">
+    the country that answered the fracturing by growing
   </text>
 </svg>

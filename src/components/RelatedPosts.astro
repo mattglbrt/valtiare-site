@@ -14,7 +14,7 @@ const all = await getPublishedPosts();
 const sharedCharacters = new Set(post.data.characters.map((c) => c.id));
 const sharedLocations = new Set([
   ...post.data.locations.map((l) => l.id),
-  ...(post.data.planet ? [post.data.planet.id] : []),
+  ...(post.data.world ? [post.data.world.id] : []),
 ]);
 const sameArc = post.data.arc?.id ?? null;
 
@@ -24,7 +24,7 @@ function score(p: CollectionEntry<'posts'>) {
   if (sameArc && p.data.arc?.id === sameArc) s += 5;
   for (const c of p.data.characters) if (sharedCharacters.has(c.id)) s += 2;
   for (const l of p.data.locations) if (sharedLocations.has(l.id)) s += 1;
-  if (p.data.planet && sharedLocations.has(p.data.planet.id)) s += 1;
+  if (p.data.world && sharedLocations.has(p.data.world.id)) s += 1;
   return s;
 }
 

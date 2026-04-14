@@ -18,16 +18,16 @@ const { location } = Astro.props;
 const { data } = location;
 const { Content } = await render(location);
 
-const parent = data.planet ? await getEntry(data.planet) : null;
+const parent = data.world ? await getEntry(data.world) : null;
 
 const allLocations = await getCollection('locations');
 const subLocations = allLocations.filter(
-  (l) => l.data.planet?.id === location.id && l.id !== location.id,
+  (l) => l.data.world?.id === location.id && l.id !== location.id,
 );
 
 const allCharacters = await getCollection('characters');
 const associatedCharacters = allCharacters.filter(
-  (c) => c.data.planet?.id === location.id,
+  (c) => c.data.world?.id === location.id,
 );
 
 const featuredPosts = await getPostsForLocation(location.id);

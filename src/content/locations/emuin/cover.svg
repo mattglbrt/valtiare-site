@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1a1e"/>
+      <stop offset="55%" stop-color="#121215"/>
+      <stop offset="100%" stop-color="#0a0a0c"/>
+    </linearGradient>
+    <radialGradient id="hollow" cx="50%" cy="55%" r="70%">
+      <stop offset="0%" stop-color="#2a2a2e" stop-opacity="0.5"/>
+      <stop offset="55%" stop-color="#141418" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#08080a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#sky)"/>
+  <rect width="100%" height="100%" fill="url(#hollow)"/>
+
+  <g fill="#b8b5a8" opacity="0.3">
+    <circle cx="160" cy="60"  r="0.9"/>
+    <circle cx="380" cy="40"  r="1.1"/>
+    <circle cx="600" cy="70"  r="0.9"/>
+    <circle cx="820" cy="50"  r="1.1"/>
+    <circle cx="1080" cy="80" r="0.9"/>
+  </g>
+
+  <g fill="#1a1a1c">
+    <path d="M0 700 L0 420 L80 440 L160 430 L240 450 L320 440 L400 460 L480 440 L560 450 L640 430 L720 450 L800 430 L880 450 L960 430 L1040 450 L1120 440 L1200 450 L1200 700 Z"/>
+  </g>
+
+  <g stroke="#3a3834" stroke-width="1.5" fill="none" opacity="0.85">
+    <line x1="140" y1="460" x2="140" y2="240"/>
+    <path d="M140 260 L120 230 M140 280 L155 250 M140 300 L125 270 M140 320 L160 290"/>
+
+    <line x1="280" y1="470" x2="280" y2="250"/>
+    <path d="M280 270 L260 240 M280 290 L295 260 M280 310 L265 280"/>
+
+    <line x1="450" y1="460" x2="450" y2="230"/>
+    <path d="M450 250 L430 220 M450 270 L470 240 M450 290 L435 260"/>
+
+    <line x1="620" y1="470" x2="620" y2="260"/>
+    <path d="M620 280 L600 250 M620 300 L635 270"/>
+
+    <line x1="780" y1="460" x2="780" y2="240"/>
+    <path d="M780 260 L760 230 M780 280 L795 250 M780 300 L765 270"/>
+
+    <line x1="940" y1="470" x2="940" y2="250"/>
+    <path d="M940 270 L920 240 M940 290 L955 260"/>
+
+    <line x1="1080" y1="460" x2="1080" y2="240"/>
+    <path d="M1080 260 L1060 230 M1080 280 L1095 250 M1080 300 L1065 270"/>
+  </g>
+
+  <g fill="#1d1d1e">
+    <path d="M0 700 L40 530 L90 545 L150 530 L210 540 L280 530 L340 545 L410 530 L480 545 L550 530 L620 540 L690 530 L760 545 L830 530 L900 540 L970 530 L1040 545 L1110 530 L1200 540 L1200 700 Z"/>
+  </g>
+
+  <g stroke="#2a2826" stroke-width="1" fill="none" opacity="0.7">
+    <path d="M60 560 L90 570 L120 560"/>
+    <path d="M220 560 L250 570 L280 560"/>
+    <path d="M400 560 L430 570 L460 560"/>
+    <path d="M580 560 L610 570 L640 560"/>
+    <path d="M760 560 L790 570 L820 560"/>
+    <path d="M960 560 L990 570 L1020 560"/>
+  </g>
+
+  <g fill="#b8b5a8" opacity="0.18">
+    <circle cx="280" cy="380" r="1.4"/>
+    <circle cx="450" cy="370" r="1.2"/>
+    <circle cx="620" cy="390" r="1.4"/>
+    <circle cx="780" cy="380" r="1.2"/>
+    <circle cx="940" cy="370" r="1.4"/>
+  </g>
+
+  <text x="600" y="140" text-anchor="middle" fill="#d4c9a8"
+        font-family="Georgia, serif" font-size="52" font-style="italic" letter-spacing="8">
+    Emuin
+  </text>
+  <text x="600" y="184" text-anchor="middle" fill="#7a7468"
+        font-family="Georgia, serif" font-size="15" letter-spacing="3">
+    the country that was drained
+  </text>
+</svg>

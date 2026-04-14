@@ -41,8 +41,11 @@ const posts = defineCollection({
           .enum(['vignette', 'short-story', 'flash-fiction', 'chapter'])
           .optional(),
 
-        // Universe placement (no timeline — timelines are not reader-facing)
-        planet: reference('locations').optional(),
+        // Universe placement (no timeline — timelines are not reader-facing).
+        // `world` is the top-level containing place for this post — a
+        // country, continent, planet, or dimensional plane, whichever is
+        // the most meaningful anchor for the story.
+        world: reference('locations').optional(),
         dimension: z.string().optional(),
 
         // Arcs are the primary narrative organizing axis.
@@ -109,7 +112,7 @@ const characters = defineCollection({
       name: z.string(),
       epithet: z.string().optional(),
       description: z.string(),
-      planet: reference('locations').optional(),
+      world: reference('locations').optional(),
       dimension: z.string().optional(),
       portrait: image().optional(),
       portraitAlt: z.string().optional(),
@@ -135,6 +138,8 @@ const locations = defineCollection({
       description: z.string(),
       locationType: z.enum([
         'planet',
+        'continent',
+        'country',
         'realm',
         'city',
         'region',
@@ -142,7 +147,9 @@ const locations = defineCollection({
         'landmark',
         'ruin',
       ]),
-      planet: reference('locations').optional(),
+      // `world` is this location's parent — whatever contains it one level up
+      // (a city's country, a country's continent, a continent's planet, etc.).
+      world: reference('locations').optional(),
       dimension: z.string().optional(),
       coverImage: image().optional(),
       coverImageAlt: z.string().optional(),

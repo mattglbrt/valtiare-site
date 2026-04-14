@@ -29,7 +29,7 @@ export async function getPostsForLocation(slug: string): Promise<Post[]> {
   const posts = await getPublishedPosts();
   return posts.filter(
     (p) =>
-      p.data.locations.some((l) => l.id === slug) || p.data.planet?.id === slug,
+      p.data.locations.some((l) => l.id === slug) || p.data.world?.id === slug,
   );
 }
 

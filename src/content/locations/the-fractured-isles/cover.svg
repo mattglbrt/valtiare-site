@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <defs>
+    <radialGradient id="sky" cx="50%" cy="60%" r="80%">
+      <stop offset="0%" stop-color="#181a1c"/>
+      <stop offset="70%" stop-color="#0d0e10"/>
+      <stop offset="100%" stop-color="#08090a"/>
+    </radialGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2e2820"/>
+      <stop offset="50%" stop-color="#1a1814"/>
+      <stop offset="100%" stop-color="#0d0c0a"/>
+    </linearGradient>
+    <radialGradient id="warm" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#ffd9a0" stop-opacity="0.45"/>
+      <stop offset="55%" stop-color="#a68d42" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#3a2418" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#sky)"/>
+
+  <g fill="#d4c9a8" opacity="0.35">
+    <circle cx="120" cy="70"  r="1"/>
+    <circle cx="280" cy="50"  r="1.2"/>
+    <circle cx="450" cy="100" r="0.9"/>
+    <circle cx="1020" cy="60" r="1.1"/>
+    <circle cx="1120" cy="150" r="1"/>
+    <circle cx="180" cy="600" r="1"/>
+    <circle cx="1060" cy="560" r="1.2"/>
+  </g>
+
+  <!-- the warm aura holding the isles together -->
+  <ellipse cx="600" cy="420" rx="500" ry="180" fill="url(#warm)"/>
+
+  <!-- floating isles: largest in center, smaller scattered around -->
+  <g stroke="#8a7635" stroke-width="0.8">
+
+    <path d="M440 380 L430 420 L460 460 L520 480 L600 500 L680 490 L740 470 L790 430 L800 390 L770 370 L700 360 L610 355 L520 360 L480 370 Z"
+          fill="url(#stone)"/>
+    <path d="M540 360 Q580 330 640 340 Q680 340 700 360" fill="none" stroke="#6b5d3e" stroke-width="0.8" opacity="0.7"/>
+
+    <path d="M200 280 L210 310 L240 330 L290 340 L340 335 L370 320 L380 290 L360 270 L310 260 L250 265 L210 275 Z"
+          fill="url(#stone)"/>
+
+    <path d="M860 310 L870 340 L900 360 L950 370 L1000 365 L1040 345 L1045 315 L1020 290 L960 280 L900 290 Z"
+          fill="url(#stone)"/>
+
+    <path d="M340 540 L350 565 L380 585 L420 590 L460 580 L475 555 L460 535 L420 525 L380 530 Z"
+          fill="url(#stone)"/>
+
+    <path d="M720 560 L735 590 L770 610 L820 605 L855 580 L855 555 L830 540 L780 538 L740 545 Z"
+          fill="url(#stone)"/>
+
+    <path d="M540 240 L545 258 L570 265 L595 260 L600 240 L580 228 L555 232 Z"
+          fill="url(#stone)"/>
+
+    <path d="M110 420 L118 440 L140 448 L165 442 L170 424 L150 412 L125 414 Z"
+          fill="url(#stone)"/>
+
+    <path d="M1060 440 L1068 460 L1090 468 L1115 462 L1120 444 L1100 432 L1075 434 Z"
+          fill="url(#stone)"/>
+  </g>
+
+  <!-- threads of light connecting the isles -->
+  <g stroke="#ffd9a0" stroke-width="0.8" fill="none" opacity="0.55">
+    <path d="M340 335 Q450 360 480 370"/>
+    <path d="M800 390 Q840 370 860 340"/>
+    <path d="M420 480 Q440 510 380 540"/>
+    <path d="M740 480 Q760 520 770 560"/>
+    <path d="M600 240 Q620 300 610 355"/>
+    <path d="M170 430 Q280 400 300 350"/>
+    <path d="M1060 450 Q1000 410 990 370"/>
+  </g>
+
+  <text x="600" y="120" text-anchor="middle" fill="#d4c9a8"
+        font-family="Georgia, serif" font-size="44" font-style="italic" letter-spacing="6">
+    The Fractured Isles
+  </text>
+  <text x="600" y="162" text-anchor="middle" fill="#7a7468"
+        font-family="Georgia, serif" font-size="15" letter-spacing="3">
+    once the country of Manira
+  </text>
+</svg>

@@ -18,7 +18,7 @@ const { character } = Astro.props;
 const { data } = character;
 const { Content } = await render(character);
 
-const planet = data.planet ? await getEntry(data.planet) : null;
+const world = data.world ? await getEntry(data.world) : null;
 const featured = await getPostsForCharacter(character.id);
 ---
 
@@ -66,12 +66,12 @@ const featured = await getPostsForCharacter(character.id);
             <span class="rounded-sm border border-ink-700 bg-ink-850/70 px-2 py-1">
               {data.status}
             </span>
-            {planet && (
+            {world && (
               <a
-                href={`/locations/${planet.id}/`}
+                href={`/locations/${world.id}/`}
                 class="rounded-sm border border-ink-700 bg-ink-850/70 px-2 py-1 no-underline hover:border-brass-700 hover:text-parchment-50"
               >
-                {planet.data.name}
+                {world.data.name}
               </a>
             )}
           </div>

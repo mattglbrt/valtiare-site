@@ -21,7 +21,7 @@ const filterAttrs = {
   'data-characters': data.characters.map((c) => c.id).join(','),
   'data-locations': [
     ...data.locations.map((l) => l.id),
-    ...(data.planet ? [data.planet.id] : []),
+    ...(data.world ? [data.world.id] : []),
   ].join(','),
   'data-medium': data.medium.join(','),
 };

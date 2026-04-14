@@ -20,7 +20,7 @@ const publishedDate = data.date.toLocaleDateString('en-US', {
 });
 
 const arcEntry = data.arc ? await getEntry(data.arc) : null;
-const planetEntry = data.planet ? await getEntry(data.planet) : null;
+const worldEntry = data.world ? await getEntry(data.world) : null;
 
 const wrapperClass =
   variant === 'light'
@@ -55,14 +55,14 @@ const wrapperClass =
       </>
     )}
 
-    {planetEntry && (
+    {worldEntry && (
       <>
         <span class="text-ink-600">·</span>
         <a
-          href={`/locations/${planetEntry.id}/`}
+          href={`/locations/${worldEntry.id}/`}
           class="no-underline text-stone-400 hover:text-parchment-50"
         >
-          {planetEntry.data.name}
+          {worldEntry.data.name}
         </a>
       </>
     )}

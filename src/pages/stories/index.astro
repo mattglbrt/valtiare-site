@@ -32,7 +32,7 @@ const charCounts = tally(
 const locCounts = tally(
   posts.flatMap((p) => [
     ...p.data.locations.map((l) => l.id),
-    ...(p.data.planet ? [p.data.planet.id] : []),
+    ...(p.data.world ? [p.data.world.id] : []),
   ]),
 );
 const mediumCounts = tally(posts.flatMap((p) => p.data.medium));
