@@ -7,7 +7,7 @@ import { getPublishedPosts } from '../utils/collections';
 const posts = await getPublishedPosts();
 const characters = await getCollection('characters');
 const locations = await getCollection('locations');
-const timelines = await getCollection('timelines');
+const arcs = await getCollection('arcs');
 ---
 
 <BaseLayout>
@@ -52,8 +52,13 @@ const timelines = await getCollection('timelines');
               <span class="text-parchment-50">{p.data.title}</span>
               {p.data.arc && (
                 <span class="ml-2 text-stone-500">
-                  [{p.data.arc} #{p.data.arcOrder}]
+                  [{p.data.arc.id} #{p.data.arcOrder}]
                 </span>
+              )}
+              {p.data.inUniverseDate && (
+                <div class="mt-1 ml-[3.4rem] italic text-stone-500">
+                  {p.data.inUniverseDate}
+                </div>
               )}
             </li>
           ))}
@@ -93,12 +98,14 @@ const timelines = await getCollection('timelines');
 
       <div>
         <h3 class="mb-3 font-display text-xl tracking-wider uppercase text-parchment-50">
-          Timelines — {timelines.length}
+          Arcs — {arcs.length}
         </h3>
         <ul class="space-y-2">
-          {timelines.map((t) => (
+          {arcs.map((a) => (
             <li>
-              <span class="text-parchment-50">{t.data.name}</span>
+              <span class="text-parchment-50">{a.data.name}</span>
+              <span class="mx-2 text-stone-500">·</span>
+              <span class="text-brass-500">{a.data.status}</span>
             </li>
           ))}
         </ul>

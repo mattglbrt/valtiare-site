@@ -3,19 +3,20 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 export type Post = CollectionEntry<'posts'>;
 export type Character = CollectionEntry<'characters'>;
 export type Location = CollectionEntry<'locations'>;
-export type Timeline = CollectionEntry<'timelines'>;
+export type Arc = CollectionEntry<'arcs'>;
 
 const isPublished = (p: Post) => p.data.status !== 'draft';
 
 export async function getPublishedPosts(): Promise<Post[]> {
   const posts = await getCollection('posts', isPublished);
-  return posts.sort(
-    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-  );
+  return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
-export async function getPostsInArc(arc: string): Promise<Post[]> {
-  const posts = await getCollection('posts', (p) => isPublished(p) && p.data.arc === arc);
+export async function getPostsInArc(arcSlug: string): Promise<Post[]> {
+  const posts = await getCollection(
+    'posts',
+    (p) => isPublished(p) && p.data.arc?.id === arcSlug,
+  );
   return posts.sort((a, b) => (a.data.arcOrder ?? 0) - (b.data.arcOrder ?? 0));
 }
 
@@ -30,4 +31,9 @@ export async function getPostsForLocation(slug: string): Promise<Post[]> {
     (p) =>
       p.data.locations.some((l) => l.id === slug) || p.data.planet?.id === slug,
   );
+}
+
+export async function getArcs(): Promise<Arc[]> {
+  const arcs = await getCollection('arcs');
+  return arcs.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 }

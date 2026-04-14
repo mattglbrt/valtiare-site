@@ -33,16 +33,21 @@ const posts = defineCollection({
         date: z.coerce.date(),
         updated: z.coerce.date().optional(),
 
+        // In-universe date string (free-form, varies by cosmology/calendar)
+        inUniverseDate: z.string().optional(),
+
         type: z.enum(['illustrated-story', 'lore']),
         storyType: z
           .enum(['vignette', 'short-story', 'flash-fiction', 'chapter'])
           .optional(),
-        tags: z.array(z.string()).default([]),
 
-        timeline: reference('timelines').optional(),
+        // Universe placement (no timeline — timelines are not reader-facing)
         planet: reference('locations').optional(),
         dimension: z.string().optional(),
-        arc: z.string().optional(),
+
+        // Arcs are the primary narrative organizing axis.
+        // Typically a tabletop campaign's emergent story line.
+        arc: reference('arcs').optional(),
         arcOrder: z.number().optional(),
 
         characters: z.array(reference('characters')).default([]),
@@ -90,13 +95,13 @@ const characters = defineCollection({
       name: z.string(),
       epithet: z.string().optional(),
       description: z.string(),
-      timeline: reference('timelines').optional(),
       planet: reference('locations').optional(),
       dimension: z.string().optional(),
       portrait: image().optional(),
       portraitAlt: z.string().optional(),
-      status: z.enum(['active', 'deceased', 'unknown', 'eternal']).default('unknown'),
-      tags: z.array(z.string()).default([]),
+      status: z
+        .enum(['active', 'deceased', 'unknown', 'eternal'])
+        .default('unknown'),
     }),
 });
 
@@ -119,22 +124,20 @@ const locations = defineCollection({
         'landmark',
         'ruin',
       ]),
-      timeline: reference('timelines').optional(),
       planet: reference('locations').optional(),
       dimension: z.string().optional(),
       coverImage: image().optional(),
       coverImageAlt: z.string().optional(),
       mapImage: image().optional(),
-      tags: z.array(z.string()).default([]),
     }),
 });
 
 /* ---------------------------------------------------------------------------
-   Timelines
+   Arcs — narrative spines, typically campaign-driven
 --------------------------------------------------------------------------- */
 
-const timelines = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/timelines' }),
+const arcs = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/arcs' }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -142,8 +145,10 @@ const timelines = defineCollection({
       order: z.number().optional(),
       coverImage: image().optional(),
       coverImageAlt: z.string().optional(),
-      tags: z.array(z.string()).default([]),
+      status: z
+        .enum(['ongoing', 'complete', 'hiatus', 'unpublished'])
+        .default('ongoing'),
     }),
 });
 
-export const collections = { posts, characters, locations, timelines };
+export const collections = { posts, characters, locations, arcs };
