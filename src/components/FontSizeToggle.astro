@@ -1,0 +1,71 @@
+---
+// Persists a reading font size on the nearest [data-font-size] ancestor.
+// Stores the choice in localStorage under 'valtiare-font-size'.
+---
+
+<div
+  class="inline-flex items-center gap-2 rounded-sm border border-ink-700/70 bg-ink-900/50 px-2 py-1 font-sans text-[0.65rem] uppercase tracking-[0.18em] text-stone-500"
+  role="group"
+  aria-label="Reading size"
+  data-font-size-toggle
+>
+  <span class="sr-only">Reading size</span>
+  <button
+    type="button"
+    data-font-size-set="sm"
+    class="h-7 px-2 text-stone-500 hover:text-parchment-50 aria-pressed:text-brass-500"
+    aria-pressed="false"
+  >A-</button>
+  <button
+    type="button"
+    data-font-size-set="md"
+    class="h-7 px-2 text-stone-500 hover:text-parchment-50 aria-pressed:text-brass-500"
+    aria-pressed="false"
+  >A</button>
+  <button
+    type="button"
+    data-font-size-set="lg"
+    class="h-7 px-2 text-stone-500 hover:text-parchment-50 aria-pressed:text-brass-500"
+    aria-pressed="false"
+  >A+</button>
+</div>
+
+<script>
+  const KEY = 'valtiare-font-size';
+  const valid = new Set(['sm', 'md', 'lg']);
+
+  function apply(size: string) {
+    if (!valid.has(size)) return;
+    const root = document.querySelector('[data-font-size]');
+    if (root) root.setAttribute('data-font-size', size);
+    document
+      .querySelectorAll<HTMLButtonElement>('[data-font-size-set]')
+      .forEach((btn) => {
+        btn.setAttribute(
+          'aria-pressed',
+          String(btn.getAttribute('data-font-size-set') === size),
+        );
+      });
+    try {
+      localStorage.setItem(KEY, size);
+    } catch {}
+  }
+
+  const saved = (() => {
+    try {
+      return localStorage.getItem(KEY) ?? 'md';
+    } catch {
+      return 'md';
+    }
+  })();
+
+  apply(saved);
+
+  document
+    .querySelectorAll<HTMLButtonElement>('[data-font-size-set]')
+    .forEach((btn) => {
+      btn.addEventListener('click', () =>
+        apply(btn.getAttribute('data-font-size-set') ?? 'md'),
+      );
+    });
+</script>

@@ -1,0 +1,70 @@
+---
+import { getEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { getPostsInArc } from '../utils/collections';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+const { post } = Astro.props;
+
+let arcName: string | null = null;
+let prev: CollectionEntry<'posts'> | null = null;
+let next: CollectionEntry<'posts'> | null = null;
+
+if (post.data.arc) {
+  const arc = await getEntry(post.data.arc);
+  arcName = arc?.data.name ?? null;
+  const inArc = await getPostsInArc(post.data.arc.id);
+  const idx = inArc.findIndex((p) => p.id === post.id);
+  prev = idx > 0 ? inArc[idx - 1] : null;
+  next = idx >= 0 && idx < inArc.length - 1 ? inArc[idx + 1] : null;
+}
+
+const hasNav = prev || next;
+---
+
+{hasNav && (
+  <nav
+    aria-label="Arc navigation"
+    class="mx-auto mt-16 max-w-4xl border-y border-ink-700/70 bg-ink-900/40 px-6 py-6"
+  >
+    {arcName && (
+      <p class="mb-4 text-center font-sans text-[0.68rem] uppercase tracking-[0.28em] text-stone-500">
+        The arc of <span class="text-brass-500">{arcName}</span>
+      </p>
+    )}
+    <div class="flex items-stretch justify-between gap-6">
+      {prev ? (
+        <a
+          href={`/stories/${prev.id}/`}
+          class="group flex-1 text-left no-underline"
+        >
+          <p class="font-sans text-[0.65rem] uppercase tracking-[0.22em] text-stone-500">
+            ← Previous
+          </p>
+          <p class="mt-2 font-display text-lg text-parchment-100 group-hover:text-brass-500">
+            {prev.data.title}
+          </p>
+        </a>
+      ) : (
+        <div class="flex-1"></div>
+      )}
+      {next ? (
+        <a
+          href={`/stories/${next.id}/`}
+          class="group flex-1 text-right no-underline"
+        >
+          <p class="font-sans text-[0.65rem] uppercase tracking-[0.22em] text-stone-500">
+            Next →
+          </p>
+          <p class="mt-2 font-display text-lg text-parchment-100 group-hover:text-brass-500">
+            {next.data.title}
+          </p>
+        </a>
+      ) : (
+        <div class="flex-1"></div>
+      )}
+    </div>
+  </nav>
+)}

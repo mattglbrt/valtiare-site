@@ -1,0 +1,72 @@
+---
+import { getEntries } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+import BaseLayout from './BaseLayout.astro';
+import UniverseMeta from '../components/UniverseMeta.astro';
+import CharacterCard from '../components/CharacterCard.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
+import FontSizeToggle from '../components/FontSizeToggle.astro';
+import OrnamentalDivider from '../components/OrnamentalDivider.astro';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  readingMinutes?: number;
+}
+
+const { post, readingMinutes } = Astro.props;
+const { data } = post;
+
+const characters =
+  data.characters.length > 0 ? await getEntries(data.characters) : [];
+---
+
+<BaseLayout
+  title={`${data.title} — Valtiare`}
+  description={data.description}
+>
+  <article data-font-size="md">
+    <header class="mx-auto max-w-2xl px-6 pt-24 text-center">
+      <p class="mb-6 font-sans text-[0.65rem] uppercase tracking-[0.32em] text-stone-500">
+        From the libraries of Valtiare
+      </p>
+      <OrnamentalDivider class="mx-auto mb-10 w-36 text-brass-600" />
+      <h1 class="heading-rule mx-auto font-display text-4xl md:text-5xl text-parchment-50">
+        {data.title}
+      </h1>
+      <p class="mx-auto mt-8 max-w-xl font-serif text-lg italic text-parchment-100/90">
+        {data.description}
+      </p>
+      <OrnamentalDivider class="mx-auto mt-12 w-36 text-brass-600" />
+    </header>
+
+    <div class="mt-10">
+      <UniverseMeta post={post} readingMinutes={readingMinutes} />
+    </div>
+
+    <div class="mx-auto mt-6 flex max-w-2xl items-center justify-end px-6">
+      <FontSizeToggle />
+    </div>
+
+    <div class="mx-auto max-w-[680px] px-6 py-12">
+      <div class="prose-whimsy">
+        <slot />
+      </div>
+
+      <OrnamentalDivider class="mx-auto mt-16 w-40 text-brass-600" />
+    </div>
+
+    {characters.length > 0 && (
+      <section class="mx-auto mt-8 max-w-4xl px-6">
+        <h2 class="heading-rule-left font-display text-2xl text-parchment-50">
+          Those named within
+        </h2>
+        <div class="mt-8 grid gap-4 md:grid-cols-2">
+          {characters.map((c) => <CharacterCard character={c} />)}
+        </div>
+      </section>
+    )}
+
+    <RelatedPosts post={post} />
+  </article>
+</BaseLayout>

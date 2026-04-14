@@ -1,0 +1,13 @@
+---
+interface Props {
+  medium: string;
+}
+const { medium } = Astro.props;
+const label = medium.replace(/-/g, ' ');
+---
+
+<span
+  class="inline-block rounded-sm border border-brass-700/70 bg-ink-850/70 px-2.5 py-1 font-sans text-[0.68rem] uppercase tracking-[0.18em] text-parchment-100/90"
+>
+  {label}
+</span>

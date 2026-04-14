@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { getPublishedPosts } from '../utils/collections';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  limit?: number;
+}
+const { post, limit = 3 } = Astro.props;
+
+const all = await getPublishedPosts();
+
+const sharedCharacters = new Set(post.data.characters.map((c) => c.id));
+const sharedLocations = new Set([
+  ...post.data.locations.map((l) => l.id),
+  ...(post.data.planet ? [post.data.planet.id] : []),
+]);
+const sameArc = post.data.arc?.id ?? null;
+
+function score(p: CollectionEntry<'posts'>) {
+  if (p.id === post.id) return -1;
+  let s = 0;
+  if (sameArc && p.data.arc?.id === sameArc) s += 5;
+  for (const c of p.data.characters) if (sharedCharacters.has(c.id)) s += 2;
+  for (const l of p.data.locations) if (sharedLocations.has(l.id)) s += 1;
+  if (p.data.planet && sharedLocations.has(p.data.planet.id)) s += 1;
+  return s;
+}
+
+const related = all
+  .map((p) => ({ p, s: score(p) }))
+  .filter((x) => x.s > 0)
+  .sort((a, b) => b.s - a.s)
+  .slice(0, limit)
+  .map((x) => x.p);
+---
+
+{related.length > 0 && (
+  <section class="mx-auto mt-20 max-w-5xl px-6">
+    <h2 class="heading-rule-left font-display text-2xl text-parchment-50">
+      Nearby in the dark
+    </h2>
+
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
+      {related.map((r) => (
+        <a
+          href={`/stories/${r.id}/`}
+          class="group block no-underline"
+        >
+          <div class="relative overflow-hidden border border-brass-700/60 bg-ink-900">
+            {r.data.heroImage ? (
+              <Image
+                src={r.data.heroImage}
+                alt={r.data.heroImageAlt ?? r.data.title}
+                width={600}
+                height={360}
+                class="aspect-[5/3] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+              />
+            ) : (
+              <div class="flex aspect-[5/3] w-full items-center justify-center bg-ink-850 p-4 text-center font-display text-xl italic text-brass-600">
+                {r.data.title}
+              </div>
+            )}
+          </div>
+          <p class="mt-3 font-display text-base text-parchment-50 group-hover:text-brass-500">
+            {r.data.title}
+          </p>
+          <p class="mt-1 font-serif text-sm italic text-stone-400 line-clamp-2">
+            {r.data.description}
+          </p>
+        </a>
+      ))}
+    </div>
+  </section>
+)}

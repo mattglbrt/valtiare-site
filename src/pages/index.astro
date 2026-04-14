@@ -1,13 +1,13 @@
 ---
-import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import OrnamentalDivider from '../components/OrnamentalDivider.astro';
+import MediumPill from '../components/MediumPill.astro';
 import { getPublishedPosts } from '../utils/collections';
 
 const posts = await getPublishedPosts();
-const characters = await getCollection('characters');
-const locations = await getCollection('locations');
-const arcs = await getCollection('arcs');
+const featured = posts[0];
+const rest = posts.slice(1);
 ---
 
 <BaseLayout>
@@ -28,88 +28,91 @@ const arcs = await getCollection('arcs');
     <OrnamentalDivider class="mt-12 w-48 text-brass-600" />
   </section>
 
-  <section class="mx-auto max-w-3xl px-6 py-16">
-    <h2 class="heading-rule-left font-display text-3xl md:text-4xl text-parchment-50">
-      Content collections are live.
-    </h2>
-    <p class="mt-8 text-parchment-100/90">
-      Phase&nbsp;2 scaffold: schemas are typed, references resolve, and the
-      first placeholder stories are walking the Orchard. Routes and layouts
-      are still to come — this index is temporarily dumping the raw
-      collection state so the data can be eyeballed end-to-end.
-    </p>
+  {featured && (
+    <section class="mx-auto max-w-6xl px-6 pb-24">
+      <p class="mb-6 text-center font-sans text-[0.65rem] uppercase tracking-[0.32em] text-stone-500">
+        Latest from the universe
+      </p>
 
-    <div class="mt-12 grid gap-8 font-sans text-sm text-parchment-100/90">
-      <div>
-        <h3 class="mb-3 font-display text-xl tracking-wider uppercase text-parchment-50">
-          Posts — {posts.length}
-        </h3>
-        <ul class="space-y-2">
-          {posts.map((p) => (
-            <li>
-              <span class="text-brass-500">{p.data.type}</span>
-              <span class="mx-2 text-stone-500">·</span>
-              <span class="text-parchment-50">{p.data.title}</span>
-              {p.data.arc && (
-                <span class="ml-2 text-stone-500">
-                  [{p.data.arc.id} #{p.data.arcOrder}]
-                </span>
-              )}
-              {p.data.inUniverseDate && (
-                <div class="mt-1 ml-[3.4rem] italic text-stone-500">
-                  {p.data.inUniverseDate}
+      <a
+        href={`/stories/${featured.id}/`}
+        class="group block no-underline"
+      >
+        <div class="relative overflow-hidden border border-brass-700/60 bg-ink-900 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.95)]">
+          {featured.data.heroImage ? (
+            <Image
+              src={featured.data.heroImage}
+              alt={featured.data.heroImageAlt ?? featured.data.title}
+              loading="eager"
+              class="block h-auto w-full object-cover transition duration-700 group-hover:scale-[1.015]"
+            />
+          ) : (
+            <div class="flex aspect-[16/7] w-full items-center justify-center bg-ink-850 p-10 text-center font-display text-3xl italic text-brass-600">
+              {featured.data.title}
+            </div>
+          )}
+        </div>
+
+        <div class="mx-auto mt-10 max-w-2xl text-center">
+          <h2 class="heading-rule mx-auto font-display text-3xl md:text-4xl text-parchment-50 group-hover:text-brass-500">
+            {featured.data.title}
+          </h2>
+          <p class="mt-6 font-serif text-lg italic text-parchment-100/90">
+            {featured.data.description}
+          </p>
+        </div>
+      </a>
+    </section>
+  )}
+
+  {rest.length > 0 && (
+    <section class="mx-auto max-w-6xl px-6 pb-24">
+      <h2 class="heading-rule-left font-display text-2xl text-parchment-50">
+        More from the archives
+      </h2>
+
+      <div class="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {rest.map((p) => (
+          <a
+            href={`/stories/${p.id}/`}
+            class="group flex flex-col no-underline"
+          >
+            <div class="relative overflow-hidden border border-brass-700/60 bg-ink-900">
+              {p.data.heroImage ? (
+                <Image
+                  src={p.data.heroImage}
+                  alt={p.data.heroImageAlt ?? p.data.title}
+                  width={900}
+                  height={560}
+                  class="aspect-[5/3] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                />
+              ) : (
+                <div class="flex aspect-[5/3] w-full flex-col items-center justify-center gap-3 bg-ink-850 p-6 text-center">
+                  <OrnamentalDivider class="w-20 text-brass-700" />
+                  <p class="font-display text-xl italic text-brass-600">
+                    {p.data.title}
+                  </p>
+                  <OrnamentalDivider class="w-20 text-brass-700" />
                 </div>
               )}
-            </li>
-          ))}
-        </ul>
-      </div>
+            </div>
 
-      <div>
-        <h3 class="mb-3 font-display text-xl tracking-wider uppercase text-parchment-50">
-          Characters — {characters.length}
-        </h3>
-        <ul class="space-y-2">
-          {characters.map((c) => (
-            <li>
-              <span class="text-parchment-50">{c.data.name}</span>
-              {c.data.epithet && (
-                <span class="ml-2 italic text-stone-400">{c.data.epithet}</span>
+            <div class="mt-4 flex-1">
+              <p class="font-display text-xl text-parchment-50 group-hover:text-brass-500">
+                {p.data.title}
+              </p>
+              <p class="mt-2 font-serif text-sm italic text-stone-400 line-clamp-3">
+                {p.data.description}
+              </p>
+              {p.data.medium.length > 0 && (
+                <div class="mt-4 flex flex-wrap gap-2">
+                  {p.data.medium.slice(0, 3).map((m) => <MediumPill medium={m} />)}
+                </div>
               )}
-            </li>
-          ))}
-        </ul>
+            </div>
+          </a>
+        ))}
       </div>
-
-      <div>
-        <h3 class="mb-3 font-display text-xl tracking-wider uppercase text-parchment-50">
-          Locations — {locations.length}
-        </h3>
-        <ul class="space-y-2">
-          {locations.map((l) => (
-            <li>
-              <span class="text-parchment-50">{l.data.name}</span>
-              <span class="mx-2 text-stone-500">·</span>
-              <span class="text-brass-500">{l.data.locationType}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="mb-3 font-display text-xl tracking-wider uppercase text-parchment-50">
-          Arcs — {arcs.length}
-        </h3>
-        <ul class="space-y-2">
-          {arcs.map((a) => (
-            <li>
-              <span class="text-parchment-50">{a.data.name}</span>
-              <span class="mx-2 text-stone-500">·</span>
-              <span class="text-brass-500">{a.data.status}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  </section>
+    </section>
+  )}
 </BaseLayout>

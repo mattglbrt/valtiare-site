@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  character: CollectionEntry<'characters'>;
+}
+const { character } = Astro.props;
+const { data } = character;
+const href = `/characters/${character.id}/`;
+---
+
+<a
+  href={href}
+  class="group flex items-start gap-5 rounded-sm border border-ink-700/80 bg-ink-900/60 p-5 no-underline transition hover:border-brass-700 hover:bg-ink-850/70"
+>
+  {data.portrait ? (
+    <Image
+      src={data.portrait}
+      alt={data.portraitAlt ?? data.name}
+      width={140}
+      height={180}
+      class="h-28 w-20 flex-none object-cover border border-brass-700/70"
+    />
+  ) : (
+    <div class="flex h-28 w-20 flex-none items-center justify-center border border-ink-700 bg-ink-850 font-display text-brass-600">
+      ?
+    </div>
+  )}
+
+  <div class="flex-1">
+    <p class="font-display text-lg text-parchment-50 group-hover:text-brass-500">
+      {data.name}
+    </p>
+    {data.epithet && (
+      <p class="mt-0.5 font-serif text-sm italic text-stone-400">
+        {data.epithet}
+      </p>
+    )}
+    <p class="mt-2 font-serif text-sm leading-snug text-parchment-100/80">
+      {data.description}
+    </p>
+  </div>
+</a>

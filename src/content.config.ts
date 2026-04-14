@@ -5,26 +5,26 @@ import { glob } from 'astro/loaders';
    Shared pieces
 --------------------------------------------------------------------------- */
 
-const galleryImage = z.object({
-  src: z.string(),
-  alt: z.string(),
-  caption: z.string().optional(),
-  width: z.number().optional(),
-  height: z.number().optional(),
-});
-
 const galleryLayout = z
   .enum(['grid', 'masonry', 'sequential', 'lightbox'])
   .default('sequential');
 
 const postStatus = z.enum(['published', 'draft']).default('published');
 
+// Strip trailing /index so folder-based entries get clean slugs.
+const stripIndex = ({ entry }: { entry: string }) =>
+  entry.replace(/\/index\.(md|mdx)$/i, '').replace(/\.(md|mdx)$/i, '');
+
 /* ---------------------------------------------------------------------------
    Posts — illustrated stories + lore entries
 --------------------------------------------------------------------------- */
 
 const posts = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/posts' }),
+  loader: glob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/posts',
+    generateId: stripIndex,
+  }),
   schema: ({ image }) =>
     z
       .object({
@@ -56,7 +56,17 @@ const posts = defineCollection({
         heroImage: image().optional(),
         heroImageAlt: z.string().optional(),
         medium: z.array(z.string()).default([]),
-        gallery: z.array(galleryImage).default([]),
+        gallery: z
+          .array(
+            z.object({
+              src: image(),
+              alt: z.string(),
+              caption: z.string().optional(),
+              width: z.number().optional(),
+              height: z.number().optional(),
+            }),
+          )
+          .default([]),
         galleryLayout,
 
         hasVideo: z.boolean().default(false),
@@ -89,7 +99,11 @@ const posts = defineCollection({
 --------------------------------------------------------------------------- */
 
 const characters = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/characters' }),
+  loader: glob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/characters',
+    generateId: stripIndex,
+  }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -110,7 +124,11 @@ const characters = defineCollection({
 --------------------------------------------------------------------------- */
 
 const locations = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/locations' }),
+  loader: glob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/locations',
+    generateId: stripIndex,
+  }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -137,7 +155,11 @@ const locations = defineCollection({
 --------------------------------------------------------------------------- */
 
 const arcs = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/arcs' }),
+  loader: glob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/arcs',
+    generateId: stripIndex,
+  }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),

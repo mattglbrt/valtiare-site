@@ -1,0 +1,45 @@
+---
+interface Props {
+  url: string;
+  title?: string;
+}
+const { url, title = 'Video' } = Astro.props;
+
+// Normalize YouTube and Vimeo URLs to embed form.
+function toEmbed(raw: string): string {
+  try {
+    const u = new URL(raw);
+    if (u.hostname.includes('youtube.com')) {
+      const id = u.searchParams.get('v');
+      if (id) return `https://www.youtube.com/embed/${id}`;
+    }
+    if (u.hostname === 'youtu.be') {
+      return `https://www.youtube.com/embed${u.pathname}`;
+    }
+    if (u.hostname.includes('vimeo.com')) {
+      const id = u.pathname.replace(/^\//, '').split('/')[0];
+      if (id) return `https://player.vimeo.com/video/${id}`;
+    }
+    return raw;
+  } catch {
+    return raw;
+  }
+}
+
+const embedUrl = toEmbed(url);
+---
+
+<figure class="my-12">
+  <div class="relative overflow-hidden border border-brass-700/70 bg-ink-900 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.9)]">
+    <div class="relative aspect-video w-full">
+      <iframe
+        src={embedUrl}
+        title={title}
+        class="absolute inset-0 h-full w-full"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</figure>

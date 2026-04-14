@@ -1,0 +1,89 @@
+---
+import MediumPill from './MediumPill.astro';
+import ReadingTime from './ReadingTime.astro';
+import { getEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  readingMinutes?: number;
+  variant?: 'light' | 'dark';
+}
+
+const { post, readingMinutes, variant = 'dark' } = Astro.props;
+const { data } = post;
+
+const publishedDate = data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const arcEntry = data.arc ? await getEntry(data.arc) : null;
+const planetEntry = data.planet ? await getEntry(data.planet) : null;
+
+const wrapperClass =
+  variant === 'light'
+    ? 'border-y border-ink-700/70 bg-ink-950/30'
+    : 'border-y border-ink-700/70 bg-ink-900/50';
+---
+
+<div class={`${wrapperClass} px-6 py-5`}>
+  <div class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-3 font-sans text-xs uppercase tracking-[0.18em] text-stone-500">
+    <time datetime={data.date.toISOString()}>{publishedDate}</time>
+
+    {data.inUniverseDate && (
+      <>
+        <span class="text-ink-600">·</span>
+        <span class="italic normal-case tracking-normal text-stone-400 font-serif text-sm">
+          {data.inUniverseDate}
+        </span>
+      </>
+    )}
+
+    {readingMinutes != null && (
+      <>
+        <span class="text-ink-600">·</span>
+        <ReadingTime minutes={readingMinutes} />
+      </>
+    )}
+
+    {data.storyType && (
+      <>
+        <span class="text-ink-600">·</span>
+        <span>{data.storyType.replace(/-/g, ' ')}</span>
+      </>
+    )}
+
+    {planetEntry && (
+      <>
+        <span class="text-ink-600">·</span>
+        <a
+          href={`/locations/${planetEntry.id}/`}
+          class="no-underline text-stone-400 hover:text-parchment-50"
+        >
+          {planetEntry.data.name}
+        </a>
+      </>
+    )}
+
+    {arcEntry && (
+      <>
+        <span class="text-ink-600">·</span>
+        <a
+          href={`/arcs/${arcEntry.id}/`}
+          class="no-underline text-brass-500 hover:text-parchment-50"
+        >
+          {arcEntry.data.name}
+          {data.arcOrder && <span class="ml-1 text-stone-500">#{data.arcOrder}</span>}
+        </a>
+      </>
+    )}
+
+    {data.medium.length > 0 && (
+      <div class="flex flex-wrap items-center gap-2">
+        {data.medium.map((m) => <MediumPill medium={m} />)}
+      </div>
+    )}
+  </div>
+</div>
