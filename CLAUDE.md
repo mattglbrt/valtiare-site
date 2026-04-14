@@ -2,13 +2,13 @@
 
 ## Project Overview
 
-Valtiare is a dark whimsical ("whimsydark") art and fiction universe. The site is the home of the Valtiare universe — a sprawling cosmology of multiple timelines, planets, and dimensions, all under one name. Whether "Valtiare" is a character, a place, or something more abstract is intentionally unresolved.
+Valtiare is a dark whimsical ("whimsydark") art and fiction universe. The site is the home of the Valtiare universe — a sprawling cosmology of planets, dimensions, and narrative arcs, all under one name. Whether "Valtiare" is a character, a place, or something more abstract is intentionally unresolved.
 
 The site showcases finished artwork — painted miniatures, sculpted models, dioramas, scenes, watercolor and ink drawings, maps, and more — alongside the short fiction that lives in and around that art. **Art leads. Stories support the art.** When someone lands on a piece, the visuals hit first.
 
 Content comes in two forms:
 1. **Illustrated stories** — finished artwork (photos, scans, video turnarounds) paired with short fiction. The art is primary; the story weaves through and around it.
-2. **Lore entries** — pure text worldbuilding pieces (history, cosmology, cultures, timelines) with no artwork.
+2. **Lore entries** — pure text worldbuilding pieces (history, cosmology, cultures) with no artwork.
 
 There is no AI-generated art anywhere on this site. All artwork is handmade by Matt across physical and traditional media.
 
@@ -45,29 +45,32 @@ Frontmatter schema:
 title: string (required)
 slug: string (auto-generated from filename if omitted)
 description: string (required) # blurb for cards/previews/meta
-date: date (required) # publication date
+date: date (required) # publication date (real-world)
 updated: date (optional) # last revision date
+
+# In-universe date — free-form, varies by cosmology/calendar
+inUniverseDate: string (optional) # e.g. "The 14th Ember of Low Ashenwake, Year 812"
 
 # Content classification
 type: "illustrated-story" | "lore" # determines layout behavior
 storyType: "vignette" | "short-story" | "flash-fiction" | "chapter" (optional) # only for illustrated stories
-tags: string[] # flexible tagging: genre, mood, medium, etc.
 
-# Universe placement
-timeline: string (optional) # timeline key, e.g. "age-of-ash", "the-sundering"
-planet: string (optional) # planet/realm key
+# Universe placement (no timelines — timelines are not part of the reader-facing model)
+planet: reference("locations") (optional) # parent planet/realm
 dimension: string (optional) # dimensional plane key
-arc: string (optional) # narrative arc/series key
-arcOrder: number (optional) # position within an arc
+
+# Narrative spine
+arc: reference("arcs") (optional) # typically a campaign-driven story arc
+arcOrder: number (optional) # position within the arc
 
 # Relationships
-characters: string[] (optional) # character slugs referenced in this post
-locations: string[] (optional) # location slugs referenced in this post
+characters: reference("characters")[] # characters featured in this post
+locations: reference("locations")[] # locations featured in this post
 
 # Art (illustrated stories only)
-heroImage: string (required for illustrated-story) # primary artwork — the first thing visitors see
+heroImage: image (required for illustrated-story) # primary artwork — the first thing visitors see
 heroImageAlt: string (required if heroImage set)
-medium: string[] (optional) # art medium tags, e.g. ["painted-miniature", "diorama", "watercolor", "ink", "sculpture", "map"]
+medium: string[] (optional) # art medium, e.g. ["painted-miniature", "diorama", "watercolor", "ink", "sculpture", "map"]
 gallery: # additional images beyond the hero
   - src: string
     alt: string
@@ -83,7 +86,7 @@ hasVideo: boolean (optional, default false)
 videoUrl: string (optional) # YouTube/Vimeo embed for turnaround videos
 
 # Reading
-readingTime: number (auto-calculated at build time)
+readingTime: number (auto-calculated at build time via remark plugin)
 status: "published" | "draft"
 ```
 
@@ -94,13 +97,11 @@ name: string (required)
 slug: string (auto-generated from filename if omitted)
 epithet: string (optional) # e.g. "The Bearer of the Pale Stone"
 description: string (required) # short intro
-timeline: string (optional)
-planet: string (optional)
+planet: reference("locations") (optional)
 dimension: string (optional)
-portrait: string (optional) # character portrait image path
+portrait: image (optional) # character portrait
 portraitAlt: string (optional)
 status: "active" | "deceased" | "unknown" | "eternal"
-tags: string[]
 ```
 
 MDX body contains the full character profile/lore.
@@ -112,35 +113,38 @@ name: string (required)
 slug: string (auto-generated from filename if omitted)
 description: string (required)
 locationType: "planet" | "realm" | "city" | "region" | "dimension" | "landmark" | "ruin"
-timeline: string (optional) # if location is timeline-specific
-planet: string (optional) # parent planet if this is a sub-location
+planet: reference("locations") (optional) # parent planet if this is a sub-location
 dimension: string (optional)
-coverImage: string (optional)
+coverImage: image (optional)
 coverImageAlt: string (optional)
-mapImage: string (optional) # if there's a map of this location
-tags: string[]
+mapImage: image (optional) # if there's a map of this location
 ```
 
-### Timelines (`src/content/timelines/`)
+### Arcs (`src/content/arcs/`)
+
+Arcs are the primary narrative organizing axis on the site. Most will be
+emergent story threads from tabletop RPG campaigns — the gameplay layer is
+stripped away; what's published is what the characters would have
+remembered afterward.
 
 ```yaml
 name: string (required)
 slug: string (auto-generated from filename if omitted)
-description: string (required)
-order: number (optional) # chronological sort order within the cosmology
-coverImage: string (optional)
+description: string (required) # what this arc is about, in-universe framing
+order: number (optional) # display order across arcs
+coverImage: image (optional)
 coverImageAlt: string (optional)
-tags: string[]
+status: "ongoing" | "complete" | "hiatus" | "unpublished"
 ```
 
 ### Content Relationships
 
-- Posts reference characters and locations by slug
-- Posts are placed in the universe via timeline, planet, dimension fields
-- Posts can belong to narrative arcs (ordered)
-- Characters and locations reference their timeline/planet/dimension
+- Posts reference characters, locations, and arcs by slug (typed `reference()` links)
+- Posts are placed in the universe via `planet` and `dimension`
+- Posts can belong to an arc with an `arcOrder` for series sequencing
+- Characters and locations resolve to their parent planet / dimension
 - All relationships resolve at build time to generate cross-links
-- Tags provide the flexible secondary navigation layer
+- Filtering across archives is by characters, locations, arcs, and medium — there are no free-form tags
 
 ### Image Assets
 
@@ -164,7 +168,7 @@ Art-forward. This page should feel like stepping into the universe.
 - Brief atmospheric intro to the Valtiare universe (1-2 sentences, not an essay)
 - Featured/pinned post (most impressive or most recent illustrated story)
 - Recent posts grid — art-forward cards where the image dominates
-- Teaser links to explore by narrative arc, timeline, or tags
+- Teaser links to explore by narrative arc, character, or location
 - The landing page should feel like a gallery entrance, not a blog homepage
 
 ### Posts Archive (`/stories/`)
@@ -172,16 +176,16 @@ Art-forward. This page should feel like stepping into the universe.
 Note: URL uses "stories" for visitor-friendly naming even though the content type is "posts."
 
 - Art-forward card grid — large thumbnails dominate, text is secondary
-- Filter by: tags, timeline, planet, dimension, medium, arc, content type (illustrated/lore)
+- Filter by: arc, character, location, planet, dimension, medium, content type (illustrated/lore)
 - Sort by: date (default), reading time
-- Cards show: hero image (large), title, description snippet, medium tags, reading time
+- Cards show: hero image (large), title, description snippet, medium pills, reading time
 - Lore entries (no art) get a distinct card style — text-focused with an ornamental border instead of an image
 
 ### Post Page (`/stories/[slug]`)
 
 **For illustrated stories (art + fiction):**
 - Hero image: full-width or near-full-width, the first thing you see
-- Title and metadata bar below the hero (date, reading time, medium, tags, universe placement)
+- Title and metadata bar below the hero (date, in-universe date, reading time, medium, arc, universe placement)
 - Story content flows with art — the layout depends on `galleryLayout`:
   - **Sequential (default):** Images appear inline at full or large width as the story unfolds. Text wraps around and between images. This is the editorial magazine feel.
   - **Grid:** Image grid section (e.g. 2x2, 3-column) above or within the story. Good for showing a mini from multiple angles.
@@ -190,12 +194,12 @@ Note: URL uses "stories" for visitor-friendly naming even though the content typ
 - Video embed section if `hasVideo` is true (turnaround videos for sculptures/minis)
 - Character cards for referenced characters
 - Arc navigation (prev/next) if part of a series
-- Related posts (same arc, same characters, same tags, same universe region)
+- Related posts (same arc, same characters, same universe region)
 
 **For lore entries (text only):**
 - No hero image — instead, an atmospheric header with ornamental styling and the title
 - Full prose layout optimized for reading (max-width ~680px, generous line height)
-- Universe placement metadata (timeline, planet, dimension)
+- Universe placement metadata (planet, dimension)
 - Cross-links to related characters, locations, and posts
 - Ornamental dividers between sections
 
@@ -203,7 +207,7 @@ Note: URL uses "stories" for visitor-friendly naming even though the content typ
 
 - Portrait grid — art dominates
 - Name and epithet below portrait
-- Filter by timeline, planet, dimension, tags
+- Filter by arc, planet, dimension, status
 - Characters without portraits get a stylized placeholder (ornamental frame with name)
 
 ### Character Page (`/characters/[slug]`)
@@ -211,13 +215,13 @@ Note: URL uses "stories" for visitor-friendly naming even though the content typ
 - Large portrait
 - Name, epithet, status
 - MDX body (full lore profile)
-- Universe placement (timeline, planet, dimension)
+- Universe placement (planet, dimension)
 - All posts featuring this character, displayed as art-forward cards
 
 ### Locations Index (`/locations/`)
 
 - Card grid with cover images/maps
-- Filter by type (planet, realm, city, etc.), timeline, dimension
+- Filter by type (planet, realm, city, etc.), dimension
 - Location hierarchy hinted at visually (planets are larger cards, sub-locations are smaller)
 
 ### Location Page (`/locations/[slug]`)
@@ -227,16 +231,6 @@ Note: URL uses "stories" for visitor-friendly naming even though the content typ
 - All posts set in this location
 - All characters associated with this location
 - Sub-locations if applicable
-
-### Universe Explorer (`/universe/`)
-
-The narrative-first navigation hub. This is where visitors go to understand the shape of the cosmology.
-
-- Visual overview of timelines (horizontal or vertical timeline visualization)
-- Planets/dimensions as navigable nodes
-- Narrative arcs displayed as story threads visitors can follow
-- This page can start simple (organized lists with ornamental styling) and evolve into something more interactive later
-- Think "world bible table of contents" — not a wiki, but a curated guided entry point
 
 ### About (`/about`)
 
@@ -285,7 +279,7 @@ The art is the star. The design should frame and elevate the artwork, never comp
 
 **Design reference:** Inspired by the Wizardry manual page layout — illustrated stone columns with creeping vines that frame the text content on the left and right sides.
 
-This is a signature visual element of the site. On **lore entry pages** and optionally on the **Universe Explorer** page, the prose content is framed by decorative illustrated column borders that run vertically along both sides of the text.
+This is a signature visual element of the site. On **lore entry pages**, the prose content is framed by decorative illustrated column borders that run vertically along both sides of the text.
 
 **Implementation approach:**
 - The columns are SVG or PNG assets placed as `position: sticky` or `background-image` elements on either side of the content column.
@@ -297,7 +291,6 @@ This is a signature visual element of the site. On **lore entry pages** and opti
 
 **Where to use columns:**
 - **Lore entry pages:** Always. These text-only pages benefit most from the framing.
-- **Universe Explorer page:** Yes, to reinforce the "ancient tome" feeling.
 - **Illustrated story pages:** No. The art is the visual focus; columns would compete.
 - **Index/archive pages:** No. Card grids need the full width.
 - **Landing page:** Optional — could frame the introductory text section only.
@@ -338,7 +331,7 @@ This is a signature visual element of the site. On **lore entry pages** and opti
 **Post cards (illustrated stories):**
 - Image-dominant. Hero image takes up 60-70% of the card.
 - Title overlaid on a dark gradient at bottom, or below image with minimal spacing.
-- Medium tags as small pills (e.g. "painted miniature", "diorama")
+- Medium pills (e.g. "painted miniature", "diorama")
 - Reading time and date in muted text
 - Hover: subtle warm glow, image slight scale-up
 
@@ -354,7 +347,7 @@ This is a signature visual element of the site. On **lore entry pages** and opti
 
 - Primary: deep berry/crimson with parchment text
 - Secondary: iron with parchment text
-- Tag pills: dark surface, muted text, warm border on hover
+- Facet pills (character / arc / location / medium): dark surface, muted text, warm border on hover
 - Filter controls: dark, understated, functional
 - All interactive elements: 44px minimum touch target
 
@@ -378,10 +371,11 @@ This IS the dark mode. No light mode. No toggle. The entire identity is dark.
 - Display on cards and post pages
 - Format: "X min read"
 
-### Tags & Filtering
-- Tags on cards and post pages, clickable to filter archive
-- Vocabulary: genre/mood (grimdark, whimsical, eerie, tragic, mythic), medium (painted-miniature, diorama, watercolor, ink, sculpture, map, mixed-media), content (vignette, short-story, lore, chapter)
-- Universe metadata (timeline, planet, dimension) also filterable
+### Facet Filtering
+- No free-form tags. Filtering is by typed relationships only.
+- Facets: **arc**, **character**, **location**, **medium**, and content type (illustrated / lore).
+- Facet pills on cards and post pages are clickable, each narrowing the archive view.
+- Universe placement (planet, dimension) is also filterable.
 
 ### Font Size Toggle
 - Small / medium / large on post pages
@@ -401,8 +395,9 @@ This IS the dark mode. No light mode. No toggle. The entire identity is dark.
 - Stories (→ `/stories/`)
 - Characters (→ `/characters/`)
 - Locations (→ `/locations/`)
-- Universe (→ `/universe/`)
 - About (→ `/about`)
+
+(A dedicated arcs or "explorer" destination may be added later once there are enough arcs to warrant it.)
 
 ### Footer
 - Minimal. Copyright. "All artwork handmade by Matt Gilbert." No social links.
@@ -466,12 +461,12 @@ valtiare/
 │   │       └── dividers/ # ornamental divider SVGs
 │   └── fonts/
 ├── src/
+│   ├── content.config.ts
 │   ├── content/
-│   │   ├── config.ts
 │   │   ├── posts/
 │   │   ├── characters/
 │   │   ├── locations/
-│   │   └── timelines/
+│   │   └── arcs/
 │   ├── components/
 │   │   ├── PostCard.astro
 │   │   ├── LoreCard.astro
@@ -480,8 +475,8 @@ valtiare/
 │   │   ├── Gallery.astro
 │   │   ├── Lightbox.astro (client island)
 │   │   ├── VideoEmbed.astro
-│   │   ├── TagList.astro
-│   │   ├── TagFilter.astro (client island)
+│   │   ├── FacetList.astro
+│   │   ├── FacetFilter.astro (client island)
 │   │   ├── ArcNav.astro
 │   │   ├── ReadingTime.astro
 │   │   ├── FontSizeToggle.astro (client island)
@@ -508,13 +503,10 @@ valtiare/
 │   │   ├── locations/
 │   │   │   ├── index.astro
 │   │   │   └── [...slug].astro
-│   │   ├── universe/
-│   │   │   └── index.astro
 │   │   └── rss.xml.ts
 │   ├── utils/
 │   │   ├── readingTime.ts
-│   │   ├── collections.ts
-│   │   └── universe.ts
+│   │   └── collections.ts
 │   └── styles/
 │       └── global.css
 └── .gitignore
@@ -524,11 +516,11 @@ valtiare/
 
 When scaffolding, create sample content so the full system is testable:
 
-- 2 illustrated story posts (with placeholder images — dark atmospheric stock photos or solid dark rectangles with labels)
+- 2 illustrated story posts (with placeholder images — dark atmospheric placeholders)
 - 1 lore entry post (text only)
 - 2 characters with placeholder portraits
 - 2 locations (1 planet, 1 sub-location)
-- 1 timeline
+- 1 arc
 - Wire up relationships between them
 
 Use whimsydark themed placeholder text — NOT lorem ipsum. Placeholder stories should read like actual vignettes. This helps evaluate whether the design serves the content.
