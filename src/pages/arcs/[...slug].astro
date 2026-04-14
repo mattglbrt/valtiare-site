@@ -4,6 +4,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import OrnamentalDivider from '../../components/OrnamentalDivider.astro';
 import PostCard from '../../components/PostCard.astro';
+import Embers from '../../components/Embers.astro';
 import { getPostsInArc } from '../../utils/collections';
 
 export async function getStaticPaths() {
@@ -47,16 +48,19 @@ const statusLabel = {
       </div>
     )}
 
-    <header class="mx-auto max-w-4xl px-6 pt-14 text-center">
-      <p class="mb-4 font-sans text-[0.65rem] uppercase tracking-[0.28em] text-stone-500">
-        Arc · {statusLabel}
-      </p>
-      <h1 class="heading-rule mx-auto font-display text-4xl md:text-6xl text-parchment-50">
-        {data.name}
-      </h1>
-      <p class="mx-auto mt-8 max-w-2xl font-serif text-lg italic text-parchment-100/90">
-        {data.description}
-      </p>
+    <header class="relative mx-auto max-w-4xl px-6 pt-14 pb-4 text-center">
+      <Embers />
+      <div class="relative">
+        <p class="mb-4 font-sans text-[0.65rem] uppercase tracking-[0.28em] text-stone-500">
+          Arc · {statusLabel}
+        </p>
+        <h1 class="heading-rule mx-auto font-display text-4xl md:text-6xl text-parchment-50">
+          {data.name}
+        </h1>
+        <p class="mx-auto mt-8 max-w-2xl font-serif text-lg italic text-parchment-100/90">
+          {data.description}
+        </p>
+      </div>
     </header>
 
     <div class="mx-auto mt-16 max-w-[680px] px-6">

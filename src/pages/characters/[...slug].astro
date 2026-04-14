@@ -4,6 +4,7 @@ import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import OrnamentalDivider from '../../components/OrnamentalDivider.astro';
 import PostCard from '../../components/PostCard.astro';
+import Embers from '../../components/Embers.astro';
 import { getPostsForCharacter } from '../../utils/collections';
 
 export async function getStaticPaths() {
@@ -28,8 +29,9 @@ const featured = await getPostsForCharacter(character.id);
   image={data.portrait?.src}
 >
   <article>
-    <header class="mx-auto max-w-5xl px-6 pt-20">
-      <div class="grid items-start gap-12 md:grid-cols-[minmax(260px,320px)_1fr]">
+    <header class="relative mx-auto max-w-5xl px-6 pt-20 pb-4">
+      <Embers />
+      <div class="relative grid items-start gap-12 md:grid-cols-[minmax(260px,320px)_1fr]">
         <div class="relative overflow-hidden border border-brass-700/70 bg-ink-900 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.9)]">
           {data.portrait ? (
             <Image

@@ -13,6 +13,7 @@ import Gallery from '../components/Gallery.astro';
 import Lightbox from '../components/Lightbox.astro';
 import FontSizeToggle from '../components/FontSizeToggle.astro';
 import OrnamentalDivider from '../components/OrnamentalDivider.astro';
+import Embers from '../components/Embers.astro';
 
 interface Props {
   post: CollectionEntry<'posts'>;
@@ -67,13 +68,16 @@ const structuredData = {
       </div>
     )}
 
-    <header class="mx-auto max-w-4xl px-6 pt-14 text-center">
-      <h1 class="heading-rule mx-auto font-display text-4xl md:text-6xl text-parchment-50">
-        {data.title}
-      </h1>
-      <p class="mx-auto mt-8 max-w-2xl font-serif text-lg italic text-parchment-100/90">
-        {data.description}
-      </p>
+    <header class="relative mx-auto max-w-4xl px-6 pt-14 pb-4 text-center">
+      <Embers />
+      <div class="relative">
+        <h1 class="heading-rule mx-auto font-display text-4xl md:text-6xl text-parchment-50">
+          {data.title}
+        </h1>
+        <p class="mx-auto mt-8 max-w-2xl font-serif text-lg italic text-parchment-100/90">
+          {data.description}
+        </p>
+      </div>
     </header>
 
     <div class="mt-10">

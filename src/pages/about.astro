@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import OrnamentalDivider from '../components/OrnamentalDivider.astro';
+import Embers from '../components/Embers.astro';
 ---
 
 <BaseLayout
@@ -8,15 +9,18 @@ import OrnamentalDivider from '../components/OrnamentalDivider.astro';
   description="Valtiare is a whimsydark universe of handmade art and short fiction by Matt Gilbert. Every image here is made by hand."
 >
   <article>
-    <header class="mx-auto max-w-2xl px-6 pt-24 text-center">
-      <p class="mb-6 font-sans text-[0.65rem] uppercase tracking-[0.32em] text-stone-500">
-        About the Universe
-      </p>
-      <OrnamentalDivider class="mx-auto mb-10 w-36 text-brass-600" />
-      <h1 class="heading-rule mx-auto font-display text-4xl md:text-5xl text-parchment-50">
-        Handmade in the dark
-      </h1>
-      <OrnamentalDivider class="mx-auto mt-12 w-36 text-brass-600" />
+    <header class="relative mx-auto max-w-2xl px-6 pt-24 pb-2 text-center">
+      <Embers />
+      <div class="relative">
+        <p class="mb-6 font-sans text-[0.65rem] uppercase tracking-[0.32em] text-stone-500">
+          About the Universe
+        </p>
+        <OrnamentalDivider class="mx-auto mb-10 w-36 text-brass-600" />
+        <h1 class="heading-rule mx-auto font-display text-4xl md:text-5xl text-parchment-50">
+          Handmade in the dark
+        </h1>
+        <OrnamentalDivider class="mx-auto mt-12 w-36 text-brass-600" />
+      </div>
     </header>
 
     <div class="mx-auto max-w-[640px] px-6 py-16">

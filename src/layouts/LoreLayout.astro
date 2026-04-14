@@ -8,6 +8,7 @@ import CharacterCard from '../components/CharacterCard.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
 import FontSizeToggle from '../components/FontSizeToggle.astro';
 import OrnamentalDivider from '../components/OrnamentalDivider.astro';
+import Embers from '../components/Embers.astro';
 
 interface Props {
   post: CollectionEntry<'posts'>;
@@ -39,18 +40,21 @@ const structuredData = {
   structuredData={structuredData}
 >
   <article data-font-size="md">
-    <header class="mx-auto max-w-2xl px-6 pt-24 text-center">
-      <p class="mb-6 font-sans text-[0.65rem] uppercase tracking-[0.32em] text-stone-500">
-        From the libraries of Valtiare
-      </p>
-      <OrnamentalDivider class="mx-auto mb-10 w-36 text-brass-600" />
-      <h1 class="heading-rule mx-auto font-display text-4xl md:text-5xl text-parchment-50">
-        {data.title}
-      </h1>
-      <p class="mx-auto mt-8 max-w-xl font-serif text-lg italic text-parchment-100/90">
-        {data.description}
-      </p>
-      <OrnamentalDivider class="mx-auto mt-12 w-36 text-brass-600" />
+    <header class="relative mx-auto max-w-2xl px-6 pt-24 pb-4 text-center">
+      <Embers />
+      <div class="relative">
+        <p class="mb-6 font-sans text-[0.65rem] uppercase tracking-[0.32em] text-stone-500">
+          From the libraries of Valtiare
+        </p>
+        <OrnamentalDivider class="mx-auto mb-10 w-36 text-brass-600" />
+        <h1 class="heading-rule mx-auto font-display text-4xl md:text-5xl text-parchment-50">
+          {data.title}
+        </h1>
+        <p class="mx-auto mt-8 max-w-xl font-serif text-lg italic text-parchment-100/90">
+          {data.description}
+        </p>
+        <OrnamentalDivider class="mx-auto mt-12 w-36 text-brass-600" />
+      </div>
     </header>
 
     <div class="mt-10">

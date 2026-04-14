@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import OrnamentalDivider from '../../components/OrnamentalDivider.astro';
+import Embers from '../../components/Embers.astro';
 
 const characters = await getCollection('characters');
 characters.sort((a, b) => a.data.name.localeCompare(b.data.name));
@@ -12,18 +13,20 @@ characters.sort((a, b) => a.data.name.localeCompare(b.data.name));
   title="Characters — Valtiare"
   description="Wanderers, envoys, and the quietly haunted of the Valtiare universe."
 >
-  <section class="mx-auto max-w-6xl px-6 pt-24 pb-16 text-center">
-    <p class="mb-4 font-sans text-[0.65rem] uppercase tracking-[0.32em] text-stone-500">
-      The Bestiary
-    </p>
-    <h1 class="heading-rule mx-auto font-display text-5xl md:text-6xl text-parchment-50">
-      Characters
-    </h1>
-    <p class="mx-auto mt-8 max-w-xl font-serif text-lg italic text-parchment-100/90">
-      Those who walk through the stories — some living, some not, some never to
-      be remembered at all.
-    </p>
-    <OrnamentalDivider class="mx-auto mt-10 w-40 text-brass-600" />
+  <section class="relative mx-auto max-w-6xl px-6 pt-24 pb-16 text-center">
+    <Embers />
+    <div class="relative">
+      <p class="mb-4 font-sans text-[0.65rem] uppercase tracking-[0.32em] text-stone-500">
+        The Bestiary
+      </p>
+      <h1 class="heading-rule mx-auto font-display text-5xl md:text-6xl text-parchment-50">
+        Characters
+      </h1>
+      <p class="mx-auto mt-8 max-w-xl font-serif text-lg italic text-parchment-100/90">
+        Those who walk through the stories.
+      </p>
+      <OrnamentalDivider class="mx-auto mt-10 w-40 text-brass-600" />
+    </div>
   </section>
 
   <section class="mx-auto max-w-6xl px-6 pb-24">
