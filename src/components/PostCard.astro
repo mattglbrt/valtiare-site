@@ -34,8 +34,13 @@ const filterAttrs = {
         <Image
           src={data.heroImage}
           alt={data.heroImageAlt ?? data.title}
-          width={size === 'large' ? 1400 : 900}
-          height={size === 'large' ? 840 : 560}
+          widths={size === 'large' ? [720, 1080, 1440] : [480, 720, 960]}
+          sizes={
+            size === 'large'
+              ? '(min-width: 1024px) 960px, 92vw'
+              : '(min-width: 1024px) 32vw, (min-width: 768px) 46vw, 92vw'
+          }
+          loading="lazy"
           class="aspect-[5/3] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
         />
       ) : (

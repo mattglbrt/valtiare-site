@@ -290,9 +290,17 @@
   );
 }
 
-/* Images inside prose break wider than the reading column. */
+/* Images inside prose break wider than the reading column.
+   On mobile the figure stays inside the prose padding to avoid any
+   horizontal overflow — the breakout only kicks in at larger widths. */
 .prose-whimsy figure {
-  margin: 2.2em -2rem;
+  margin: 2.2em 0;
+}
+
+@media (min-width: 720px) {
+  .prose-whimsy figure {
+    margin: 2.2em -1.5rem;
+  }
 }
 
 @media (min-width: 900px) {

@@ -32,12 +32,26 @@ const hasTopGallery =
     data.galleryLayout === 'masonry' ||
     data.galleryLayout === 'lightbox') &&
   data.gallery.length > 0;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  datePublished: data.date.toISOString(),
+  dateModified: (data.updated ?? data.date).toISOString(),
+  author: { '@type': 'Person', name: 'Matt Gilbert' },
+  publisher: { '@type': 'Organization', name: 'Valtiare' },
+  ...(data.heroImage ? { image: data.heroImage.src } : {}),
+};
 ---
 
 <BaseLayout
   title={`${data.title} — Valtiare`}
   description={data.description}
   image={data.heroImage?.src}
+  ogType="article"
+  structuredData={structuredData}
 >
   <article data-font-size="md">
     {data.heroImage && (
@@ -46,6 +60,8 @@ const hasTopGallery =
           src={data.heroImage}
           alt={data.heroImageAlt ?? data.title}
           loading="eager"
+          widths={[720, 1080, 1440, 1800, 2400]}
+          sizes="100vw"
           class="block h-auto w-full max-h-[85vh] object-cover"
         />
       </div>

@@ -40,6 +40,8 @@ const statusLabel = {
           src={data.coverImage}
           alt={data.coverImageAlt ?? data.name}
           loading="eager"
+          widths={[720, 1080, 1440, 1920]}
+          sizes="100vw"
           class="block h-auto max-h-[70vh] w-full object-cover"
         />
       </div>

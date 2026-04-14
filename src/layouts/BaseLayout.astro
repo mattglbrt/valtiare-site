@@ -7,12 +7,16 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  ogType?: 'website' | 'article';
+  structuredData?: Record<string, unknown>;
 }
 
 const {
   title = 'Valtiare — A whimsydark art and fiction universe',
   description = 'The canonical home of the Valtiare universe — handmade art, short fiction, and the cosmology that binds them.',
   image,
+  ogType = 'website',
+  structuredData,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://valtiare.com');
@@ -30,23 +34,42 @@ const ogImage = image ? new URL(image, canonical).toString() : null;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.toString()} />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.toString()} />
+    <meta property="og:site_name" content="Valtiare" />
     {ogImage && <meta property="og:image" content={ogImage} />}
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {ogImage && <meta name="twitter:image" content={ogImage} />}
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#0e0d0b" />
+    <link rel="alternate" type="application/rss+xml" title="Valtiare" href="/rss.xml" />
+
+    {structuredData && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(structuredData)}
+      />
+    )}
   </head>
   <body class="bg-ink-950 text-parchment-100 font-serif">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:rounded focus:border focus:border-brass-500 focus:bg-ink-900 focus:px-4 focus:py-2 focus:font-sans focus:text-sm focus:text-parchment-50"
+    >
+      Skip to content
+    </a>
+
     <div class="relative z-10 flex min-h-screen flex-col">
       <Nav />
-      <main class="flex-1">
+      <main id="main" class="flex-1">
         <slot />
       </main>
       <Footer />
