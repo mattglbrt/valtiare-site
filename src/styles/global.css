@@ -320,36 +320,39 @@
 
 .embers span {
   position: absolute;
-  bottom: -10%;
-  width: 3px;
-  height: 3px;
+  bottom: -5%;
+  width: 6px;
+  height: 6px;
   border-radius: 9999px;
   background: radial-gradient(
     circle,
-    var(--color-brass-500) 0%,
-    color-mix(in oklab, var(--color-berry-500) 60%, transparent) 45%,
-    transparent 70%
+    #ffd9a0 0%,
+    var(--color-brass-500) 30%,
+    color-mix(in oklab, var(--color-berry-500) 70%, transparent) 60%,
+    transparent 80%
   );
-  box-shadow: 0 0 8px 1px color-mix(in oklab, var(--color-brass-500) 55%, transparent);
+  box-shadow:
+    0 0 14px 2px color-mix(in oklab, var(--color-brass-500) 80%, transparent),
+    0 0 28px 6px color-mix(in oklab, var(--color-berry-500) 40%, transparent);
   opacity: 0;
-  animation: ember-drift var(--ember-duration, 18s) linear var(--ember-delay, 0s) infinite;
+  animation: ember-drift var(--ember-duration, 14s) linear var(--ember-delay, 0s) infinite;
   will-change: transform, opacity;
 }
 
 @keyframes ember-drift {
   0% {
-    transform: translate3d(0, 0, 0) scale(0.6);
+    transform: translate3d(0, 0, 0) scale(0.7);
     opacity: 0;
   }
-  10% {
-    opacity: 0.8;
+  8% {
+    opacity: 1;
   }
   50% {
-    transform: translate3d(var(--ember-drift, 20px), -55vh, 0) scale(1);
-    opacity: 0.6;
+    transform: translate3d(var(--ember-drift, 20px), -55vh, 0) scale(1.1);
+    opacity: 0.9;
   }
   100% {
-    transform: translate3d(calc(var(--ember-drift, 20px) * -0.5), -110vh, 0) scale(0.4);
+    transform: translate3d(calc(var(--ember-drift, 20px) * -0.5), -110vh, 0) scale(0.5);
     opacity: 0;
   }
 }
