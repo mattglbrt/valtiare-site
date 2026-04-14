@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import OrnamentalDivider from '../../components/OrnamentalDivider.astro';
+
+const characters = await getCollection('characters');
+characters.sort((a, b) => a.data.name.localeCompare(b.data.name));
+---
+
+<BaseLayout
+  title="Characters — Valtiare"
+  description="Wanderers, envoys, and the quietly haunted of the Valtiare universe."
+>
+  <section class="mx-auto max-w-6xl px-6 pt-24 pb-16 text-center">
+    <p class="mb-4 font-sans text-[0.65rem] uppercase tracking-[0.32em] text-stone-500">
+      The Bestiary
+    </p>
+    <h1 class="heading-rule mx-auto font-display text-5xl md:text-6xl text-parchment-50">
+      Characters
+    </h1>
+    <p class="mx-auto mt-8 max-w-xl font-serif text-lg italic text-parchment-100/90">
+      Those who walk through the stories — some living, some not, some never to
+      be remembered at all.
+    </p>
+    <OrnamentalDivider class="mx-auto mt-10 w-40 text-brass-600" />
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 pb-24">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      {characters.map((c) => (
+        <a
+          href={`/characters/${c.id}/`}
+          class="group block no-underline"
+        >
+          <div class="relative overflow-hidden border border-brass-700/60 bg-ink-900">
+            {c.data.portrait ? (
+              <Image
+                src={c.data.portrait}
+                alt={c.data.portraitAlt ?? c.data.name}
+                width={480}
+                height={640}
+                class="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+              />
+            ) : (
+              <div class="flex aspect-[3/4] w-full flex-col items-center justify-center gap-3 bg-ink-850 p-6">
+                <OrnamentalDivider class="w-24 text-brass-700" />
+                <p class="font-display text-xl italic text-brass-600">
+                  {c.data.name}
+                </p>
+                <OrnamentalDivider class="w-24 text-brass-700" />
+              </div>
+            )}
+          </div>
+          <p class="mt-4 text-center font-display text-xl text-parchment-50 group-hover:text-brass-500">
+            {c.data.name}
+          </p>
+          {c.data.epithet && (
+            <p class="mt-1 text-center font-serif text-sm italic text-stone-400">
+              {c.data.epithet}
+            </p>
+          )}
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
