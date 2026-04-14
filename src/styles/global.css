@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   Valtiare — whimsydark theme tokens
+   Valtiare theme tokens
    Dark warm palette, classic RPG-manual serif typography.
 --------------------------------------------------------------------------- */
 
@@ -159,31 +159,31 @@
    Used inside IllustratedStoryLayout and LoreLayout for the MDX <slot />.
 --------------------------------------------------------------------------- */
 
-.prose-whimsy {
+.prose-body {
   color: var(--color-parchment-100);
   font-family: var(--font-serif);
   font-size: var(--prose-font-size, 1.125rem);
   line-height: 1.8;
 }
 
-.prose-whimsy > * + * {
+.prose-body > * + * {
   margin-top: 1.3em;
 }
 
-.prose-whimsy p {
+.prose-body p {
   text-wrap: pretty;
 }
 
-.prose-whimsy em {
+.prose-body em {
   color: var(--color-parchment-50);
 }
 
-.prose-whimsy strong {
+.prose-body strong {
   color: var(--color-parchment-50);
   font-weight: 700;
 }
 
-.prose-whimsy h2 {
+.prose-body h2 {
   margin-top: 2.2em;
   font-family: var(--font-display);
   font-size: 1.9em;
@@ -193,7 +193,7 @@
   line-height: 1.2;
 }
 
-.prose-whimsy h2::after {
+.prose-body h2::after {
   content: "";
   display: block;
   margin-top: 0.45em;
@@ -206,7 +206,7 @@
   );
 }
 
-.prose-whimsy h3 {
+.prose-body h3 {
   margin-top: 1.8em;
   font-family: var(--font-display);
   font-size: 1.35em;
@@ -215,7 +215,7 @@
   line-height: 1.25;
 }
 
-.prose-whimsy h4 {
+.prose-body h4 {
   margin-top: 1.6em;
   font-family: var(--font-display);
   font-size: 1.1em;
@@ -223,18 +223,18 @@
   font-style: italic;
 }
 
-.prose-whimsy a {
+.prose-body a {
   color: var(--color-brass-500);
   text-decoration: underline;
   text-decoration-color: color-mix(in oklab, var(--color-brass-500) 40%, transparent);
   text-underline-offset: 0.18em;
 }
-.prose-whimsy a:hover {
+.prose-body a:hover {
   color: var(--color-parchment-50);
   text-decoration-color: var(--color-parchment-50);
 }
 
-.prose-whimsy blockquote {
+.prose-body blockquote {
   margin: 1.8em 0;
   padding: 0.2em 0 0.2em 1.4em;
   border-left: 2px solid var(--color-brass-700);
@@ -242,22 +242,22 @@
   color: var(--color-parchment-50);
 }
 
-.prose-whimsy blockquote p {
+.prose-body blockquote p {
   margin: 0.4em 0;
 }
 
-.prose-whimsy ul,
-.prose-whimsy ol {
+.prose-body ul,
+.prose-body ol {
   padding-left: 1.5em;
 }
 
-.prose-whimsy ul {
+.prose-body ul {
   list-style: none;
 }
-.prose-whimsy ul > li {
+.prose-body ul > li {
   position: relative;
 }
-.prose-whimsy ul > li::before {
+.prose-body ul > li::before {
   content: "◇";
   position: absolute;
   left: -1.2em;
@@ -266,18 +266,18 @@
   top: 0.5em;
 }
 
-.prose-whimsy ol {
+.prose-body ol {
   list-style: lower-roman;
 }
-.prose-whimsy ol li::marker {
+.prose-body ol li::marker {
   color: var(--color-brass-600);
 }
 
-.prose-whimsy li + li {
+.prose-body li + li {
   margin-top: 0.5em;
 }
 
-.prose-whimsy hr {
+.prose-body hr {
   margin: 2.4em auto;
   width: 6em;
   height: 1px;
@@ -293,26 +293,26 @@
 /* Images inside prose break wider than the reading column.
    On mobile the figure stays inside the prose padding to avoid any
    horizontal overflow — the breakout only kicks in at larger widths. */
-.prose-whimsy figure {
+.prose-body figure {
   margin: 2.2em 0;
 }
 
 @media (min-width: 720px) {
-  .prose-whimsy figure {
+  .prose-body figure {
     margin: 2.2em -1.5rem;
   }
 }
 
 @media (min-width: 900px) {
-  .prose-whimsy figure {
+  .prose-body figure {
     margin: 2.4em calc(50% - min(480px, 46vw));
   }
 }
 
 /* Font size toggle support — set on <article data-font-size="sm|md|lg"> */
-[data-font-size='sm'] .prose-whimsy { --prose-font-size: 1rem; }
-[data-font-size='md'] .prose-whimsy { --prose-font-size: 1.125rem; }
-[data-font-size='lg'] .prose-whimsy { --prose-font-size: 1.25rem; }
+[data-font-size='sm'] .prose-body { --prose-font-size: 1rem; }
+[data-font-size='md'] .prose-body { --prose-font-size: 1.125rem; }
+[data-font-size='lg'] .prose-body { --prose-font-size: 1.25rem; }
 
 /* ---------------------------------------------------------------------------
    Ember particles — CSS-only drifting embers, used on the landing hero.

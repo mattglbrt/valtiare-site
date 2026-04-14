@@ -8,7 +8,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: 'Valtiare',
     description:
-      'A whimsydark universe of handmade art and short fiction. New dispatches from the cooling worlds.',
+      'Handmade art and short fiction from the Valtiare universe.',
     site: context.site ?? 'https://valtiare.com',
     items: posts.map((post) => ({
       title: post.data.title,
