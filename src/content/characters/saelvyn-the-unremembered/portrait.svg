@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#231f1b"/>
+      <stop offset="100%" stop-color="#0e0d0b"/>
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <ellipse cx="300" cy="340" rx="140" ry="180" fill="#1b1915" stroke="#6b5d3e" stroke-width="1.5"/>
+  <rect x="180" y="280" width="240" height="80" fill="#0e0d0b" stroke="#8a7635" stroke-width="1"/>
+  <line x1="220" y1="320" x2="260" y2="320" stroke="#a68d42" stroke-width="2"/>
+  <line x1="340" y1="320" x2="380" y2="320" stroke="#a68d42" stroke-width="2"/>
+  <path d="M220 500 L160 760 L440 760 L380 500 Z" fill="#14110e" stroke="#6b5d3e" stroke-width="1"/>
+  <text x="300" y="760" text-anchor="middle" fill="#8a8074"
+        font-family="Georgia, serif" font-size="14" font-style="italic" letter-spacing="2">
+    Saelvyn, the Unremembered
+  </text>
+</svg>

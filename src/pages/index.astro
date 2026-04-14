@@ -1,19 +1,13 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import OrnamentalDivider from '../components/OrnamentalDivider.astro';
-import ImageFrame from '../components/ImageFrame.astro';
+import { getPublishedPosts } from '../utils/collections';
 
-const placeholderHero =
-  "data:image/svg+xml;utf8," +
-  encodeURIComponent(
-    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 960 540'>
-      <rect width='100%' height='100%' fill='#1b1915'/>
-      <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'
-            fill='#8a7635' font-family='Georgia' font-size='28' font-style='italic'>
-        placeholder hero — art lives here
-      </text>
-    </svg>`
-  );
+const posts = await getPublishedPosts();
+const characters = await getCollection('characters');
+const locations = await getCollection('locations');
+const timelines = await getCollection('timelines');
 ---
 
 <BaseLayout>
@@ -36,18 +30,79 @@ const placeholderHero =
 
   <section class="mx-auto max-w-3xl px-6 py-16">
     <h2 class="heading-rule-left font-display text-3xl md:text-4xl text-parchment-50">
-      The foundation holds.
+      Content collections are live.
     </h2>
     <p class="mt-8 text-parchment-100/90">
-      This is a Phase&nbsp;1 scaffold. The palette breathes, the serifs settle,
-      the grain drifts across the ink. From here we&rsquo;ll grow stories,
-      characters, and the cosmology itself.
+      Phase&nbsp;2 scaffold: schemas are typed, references resolve, and the
+      first placeholder stories are walking the Orchard. Routes and layouts
+      are still to come — this index is temporarily dumping the raw
+      collection state so the data can be eyeballed end-to-end.
     </p>
 
-    <ImageFrame
-      src={placeholderHero}
-      alt="Placeholder hero artwork"
-      caption="Placeholder — art will live in this frame"
-    />
+    <div class="mt-12 grid gap-8 font-sans text-sm text-parchment-100/90">
+      <div>
+        <h3 class="mb-3 font-display text-xl tracking-wider uppercase text-parchment-50">
+          Posts — {posts.length}
+        </h3>
+        <ul class="space-y-2">
+          {posts.map((p) => (
+            <li>
+              <span class="text-brass-500">{p.data.type}</span>
+              <span class="mx-2 text-stone-500">·</span>
+              <span class="text-parchment-50">{p.data.title}</span>
+              {p.data.arc && (
+                <span class="ml-2 text-stone-500">
+                  [{p.data.arc} #{p.data.arcOrder}]
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="mb-3 font-display text-xl tracking-wider uppercase text-parchment-50">
+          Characters — {characters.length}
+        </h3>
+        <ul class="space-y-2">
+          {characters.map((c) => (
+            <li>
+              <span class="text-parchment-50">{c.data.name}</span>
+              {c.data.epithet && (
+                <span class="ml-2 italic text-stone-400">{c.data.epithet}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="mb-3 font-display text-xl tracking-wider uppercase text-parchment-50">
+          Locations — {locations.length}
+        </h3>
+        <ul class="space-y-2">
+          {locations.map((l) => (
+            <li>
+              <span class="text-parchment-50">{l.data.name}</span>
+              <span class="mx-2 text-stone-500">·</span>
+              <span class="text-brass-500">{l.data.locationType}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="mb-3 font-display text-xl tracking-wider uppercase text-parchment-50">
+          Timelines — {timelines.length}
+        </h3>
+        <ul class="space-y-2">
+          {timelines.map((t) => (
+            <li>
+              <span class="text-parchment-50">{t.data.name}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   </section>
 </BaseLayout>

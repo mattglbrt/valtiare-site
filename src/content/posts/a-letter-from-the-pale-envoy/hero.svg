@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <radialGradient id="lamp" cx="50%" cy="45%" r="45%">
+      <stop offset="0%" stop-color="#a68d42" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#3a2418" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0e0d0b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#14110e"/>
+  <rect width="100%" height="100%" fill="url(#lamp)"/>
+
+  <rect x="460" y="220" width="680" height="560" fill="#e0d5b5" opacity="0.12"
+        stroke="#6b5d3e" stroke-width="1.5"/>
+  <rect x="490" y="250" width="620" height="500" fill="#d4c9a8" opacity="0.08"/>
+
+  <g stroke="#8a8074" stroke-width="1.2" opacity="0.55">
+    <line x1="520" y1="310" x2="1080" y2="310"/>
+    <line x1="520" y1="350" x2="1060" y2="350"/>
+    <line x1="520" y1="390" x2="1080" y2="390"/>
+    <line x1="520" y1="430" x2="1020" y2="430"/>
+    <line x1="520" y1="470" x2="1080" y2="470"/>
+    <line x1="520" y1="510" x2="1040" y2="510"/>
+    <line x1="520" y1="550" x2="1080" y2="550"/>
+    <line x1="520" y1="590" x2="1000" y2="590"/>
+    <line x1="520" y1="630" x2="1080" y2="630"/>
+  </g>
+
+  <circle cx="1030" cy="700" r="26" fill="#7a2e3b" opacity="0.85"/>
+  <circle cx="1030" cy="700" r="26" fill="none" stroke="#943548" stroke-width="1.2"/>
+  <path d="M1015 690 L1045 710 M1045 690 L1015 710" stroke="#14110e" stroke-width="2"/>
+</svg>
