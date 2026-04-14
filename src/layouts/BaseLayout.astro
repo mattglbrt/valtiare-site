@@ -1,0 +1,54 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Valtiare — A whimsydark art and fiction universe',
+  description = 'The canonical home of the Valtiare universe — handmade art, short fiction, and the cosmology that binds them.',
+  image = '/images/ui/og-default.jpg',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://valtiare.com');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.toString()} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.toString()} />
+    <meta property="og:image" content={new URL(image, canonical).toString()} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0e0d0b" />
+  </head>
+  <body class="bg-ink-950 text-parchment-100 font-serif">
+    <div class="relative z-10 flex min-h-screen flex-col">
+      <Nav />
+      <main class="flex-1">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+
+    <div class="atmosphere-layer atmosphere-grain" aria-hidden="true"></div>
+    <div class="atmosphere-layer atmosphere-vignette" aria-hidden="true"></div>
+  </body>
+</html>

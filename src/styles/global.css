@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Valtiare — whimsydark theme tokens
+   Dark warm palette, classic RPG-manual serif typography.
+--------------------------------------------------------------------------- */
+
+@theme {
+  /* Background layers */
+  --color-ink-950: #0e0d0b;
+  --color-ink-900: #14130f;
+  --color-ink-850: #1b1915;
+  --color-ink-800: #231f1b;
+  --color-ink-700: #2a2826;
+  --color-ink-600: #3a3835;
+
+  /* Text */
+  --color-parchment-50: #e0d5b5;
+  --color-parchment-100: #d4c9a8;
+  --color-stone-400: #8a8074;
+  --color-stone-500: #7a7468;
+
+  /* Accents */
+  --color-berry-600: #7a2e3b;
+  --color-berry-500: #943548;
+  --color-brass-700: #6b5d3e;
+  --color-brass-600: #8a7635;
+  --color-brass-500: #a68d42;
+  --color-verdigris-700: #3a5a4a;
+  --color-verdigris-600: #4a6b58;
+
+  /* Typography */
+  --font-serif: "Sorts Mill Goudy", "EB Garamond", Georgia, "Times New Roman", serif;
+  --font-display: "Sorts Mill Goudy", "EB Garamond", Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Content widths */
+  --container-prose: 680px;
+  --container-art: 960px;
+}
+
+/* ---------------------------------------------------------------------------
+   Base element styles
+--------------------------------------------------------------------------- */
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    background-color: var(--color-ink-950);
+    color: var(--color-parchment-100);
+    font-family: var(--font-serif);
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--color-parchment-50);
+    font-weight: 700;
+    letter-spacing: 0.005em;
+    line-height: 1.2;
+  }
+
+  a {
+    color: var(--color-brass-500);
+    text-decoration-color: color-mix(in oklab, var(--color-brass-500) 40%, transparent);
+    text-underline-offset: 0.2em;
+    transition: color 180ms ease;
+  }
+  a:hover {
+    color: var(--color-parchment-50);
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-berry-500) 60%, transparent);
+    color: var(--color-parchment-50);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Signature: heading + thin brass rule (Wizardry manual motif)
+--------------------------------------------------------------------------- */
+
+.heading-rule {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6em;
+}
+.heading-rule::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 72%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-brass-600) 20%,
+    var(--color-brass-600) 80%,
+    transparent
+  );
+}
+
+.heading-rule-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6em;
+}
+.heading-rule-left::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 60%;
+  background: linear-gradient(
+    to right,
+    var(--color-brass-600),
+    color-mix(in oklab, var(--color-brass-600) 20%, transparent)
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   Atmosphere: grain overlay + warm vignette
+--------------------------------------------------------------------------- */
+
+.atmosphere-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.atmosphere-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.86  0 0 0 0 0.79  0 0 0 0 0.66  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: overlay;
+  opacity: 0.35;
+}
+
+.atmosphere-vignette {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}

@@ -1,0 +1,77 @@
+---
+const links = [
+  { href: '/stories/', label: 'Stories' },
+  { href: '/characters/', label: 'Characters' },
+  { href: '/locations/', label: 'Locations' },
+  { href: '/universe/', label: 'Universe' },
+  { href: '/about', label: 'About' },
+];
+---
+
+<header class="relative z-20 border-b border-ink-700/80 bg-ink-950/70 backdrop-blur-sm">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+    <a
+      href="/"
+      class="font-display text-2xl tracking-[0.18em] uppercase text-parchment-50 no-underline hover:text-brass-500"
+    >
+      Valtiare
+    </a>
+
+    <nav class="hidden md:block" aria-label="Primary">
+      <ul class="flex items-center gap-8 font-sans text-sm uppercase tracking-[0.15em] text-stone-400">
+        {links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              class="no-underline transition hover:text-parchment-50"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <button
+      type="button"
+      class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded border border-ink-700 text-parchment-100"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      data-nav-toggle
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="4" y1="7" x2="20" y2="7" />
+        <line x1="4" y1="12" x2="20" y2="12" />
+        <line x1="4" y1="17" x2="20" y2="17" />
+      </svg>
+    </button>
+  </div>
+
+  <nav
+    class="md:hidden hidden border-t border-ink-700/80 bg-ink-900"
+    aria-label="Mobile"
+    data-nav-menu
+  >
+    <ul class="mx-auto flex max-w-6xl flex-col px-6 py-4 font-sans text-sm uppercase tracking-[0.15em] text-stone-400">
+      {links.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            class="block py-3 no-underline transition hover:text-parchment-50"
+          >
+            {l.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector('[data-nav-toggle]');
+  const menu = document.querySelector('[data-nav-menu]');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+</script>
