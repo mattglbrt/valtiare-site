@@ -373,3 +373,67 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Firelit wordmark — the Valtiare text in nav and footer appears lit by
+   an unseen fire. Layered text-shadow in hot white, amber, and deep berry
+   tones, flickering on an irregular cadence so it never feels mechanical.
+--------------------------------------------------------------------------- */
+
+.firelit-wordmark {
+  animation: firelit-flicker 5.5s ease-in-out infinite;
+}
+
+@keyframes firelit-flicker {
+  0%, 100% {
+    text-shadow:
+      0 0 4px rgba(255, 240, 200, 0.55),
+      0 0 11px rgba(255, 200, 110, 0.45),
+      0 0 22px rgba(180, 80, 50, 0.25);
+  }
+  13% {
+    text-shadow:
+      0 0 6px rgba(255, 245, 210, 0.65),
+      0 0 15px rgba(255, 210, 120, 0.52),
+      0 0 30px rgba(200, 90, 55, 0.34);
+  }
+  27% {
+    text-shadow:
+      0 0 3px rgba(255, 235, 190, 0.42),
+      0 0 8px rgba(255, 190, 95, 0.32),
+      0 0 16px rgba(170, 70, 45, 0.18);
+  }
+  41% {
+    text-shadow:
+      0 0 7px rgba(255, 245, 215, 0.72),
+      0 0 17px rgba(255, 215, 130, 0.58),
+      0 0 34px rgba(210, 95, 55, 0.4);
+  }
+  56% {
+    text-shadow:
+      0 0 4px rgba(255, 240, 200, 0.55),
+      0 0 11px rgba(255, 200, 110, 0.45),
+      0 0 20px rgba(180, 80, 50, 0.25);
+  }
+  71% {
+    text-shadow:
+      0 0 5px rgba(255, 240, 205, 0.6),
+      0 0 13px rgba(255, 205, 115, 0.48),
+      0 0 24px rgba(190, 85, 50, 0.3);
+  }
+  84% {
+    text-shadow:
+      0 0 3px rgba(255, 230, 185, 0.48),
+      0 0 9px rgba(255, 195, 100, 0.38),
+      0 0 16px rgba(170, 75, 45, 0.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .firelit-wordmark {
+    animation: none;
+    text-shadow:
+      0 0 4px rgba(255, 240, 200, 0.4),
+      0 0 11px rgba(255, 200, 110, 0.3);
+  }
+}
+
