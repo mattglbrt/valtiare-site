@@ -147,8 +147,14 @@
 }
 
 .atmosphere-vignette {
+  /* Explicit ellipse sized 80% wide / 70% tall of the viewport so the
+     horizontal axis reaches further out than a default farthest-corner
+     ellipse would. Left and right edges now sit earlier in the gradient
+     (around the mid stops) while top and bottom stay close to the
+     original falloff. Net effect: reading the sides of prose and cards
+     is comfortable, scroll-fade feel from top/bottom stays intact. */
   background: radial-gradient(
-    ellipse at center,
+    ellipse 80% 70% at center,
     transparent 40%,
     rgba(0, 0, 0, 0.55) 75%,
     rgba(0, 0, 0, 0.85) 100%

@@ -1,9 +1,12 @@
 ---
+// Each link gets its own duration and a negative delay so the firelit
+// flicker starts mid-cycle and never realigns between links. Durations
+// are deliberately coprime so the phases never drift back into sync.
 const links = [
-  { href: '/stories/', label: 'Stories' },
-  { href: '/characters/', label: 'Characters' },
-  { href: '/locations/', label: 'Locations' },
-  { href: '/about', label: 'About' },
+  { href: '/stories/',    label: 'Stories',    duration: '5.9s', delay: '-1.2s' },
+  { href: '/characters/', label: 'Characters', duration: '5.1s', delay: '-2.8s' },
+  { href: '/locations/',  label: 'Locations',  duration: '6.3s', delay: '-0.5s' },
+  { href: '/about',       label: 'About',      duration: '4.8s', delay: '-3.4s' },
 ];
 ---
 
@@ -23,6 +26,7 @@ const links = [
             <a
               href={l.href}
               class="firelit-wordmark no-underline transition hover:text-parchment-50"
+              style={`animation-duration: ${l.duration}; animation-delay: ${l.delay};`}
             >
               {l.label}
             </a>
@@ -57,6 +61,7 @@ const links = [
           <a
             href={l.href}
             class="firelit-wordmark block py-3 no-underline transition hover:text-parchment-50"
+            style={`animation-duration: ${l.duration}; animation-delay: ${l.delay};`}
           >
             {l.label}
           </a>
