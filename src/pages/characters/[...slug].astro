@@ -21,6 +21,8 @@ const { Content } = await render(character);
 
 const world = data.world ? await getEntry(data.world) : null;
 const featured = await getPostsForCharacter(character.id);
+
+const hasBody = Boolean(character.body?.trim());
 ---
 
 <BaseLayout
@@ -81,12 +83,14 @@ const featured = await getPostsForCharacter(character.id);
       </div>
     </header>
 
-    <div class="mx-auto mt-16 max-w-[680px] px-6">
-      <div class="prose-body">
-        <Content />
+    {hasBody && (
+      <div class="mx-auto mt-16 max-w-[680px] px-6">
+        <div class="prose-body">
+          <Content />
+        </div>
+        <OrnamentalDivider class="mx-auto mt-16 w-40 text-brass-600" />
       </div>
-      <OrnamentalDivider class="mx-auto mt-16 w-40 text-brass-600" />
-    </div>
+    )}
 
     {featured.length > 0 && (
       <section class="mx-auto mt-8 max-w-6xl px-6 pb-24">
