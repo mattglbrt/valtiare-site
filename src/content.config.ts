@@ -78,21 +78,15 @@ const posts = defineCollection({
         status: postStatus,
       })
       .superRefine((data, ctx) => {
-        if (data.type === 'illustrated-story') {
-          if (!data.heroImage) {
-            ctx.addIssue({
-              code: z.ZodIssueCode.custom,
-              path: ['heroImage'],
-              message: 'heroImage is required for illustrated-story posts',
-            });
-          }
-          if (!data.heroImageAlt) {
-            ctx.addIssue({
-              code: z.ZodIssueCode.custom,
-              path: ['heroImageAlt'],
-              message: 'heroImageAlt is required when heroImage is set',
-            });
-          }
+        // heroImage is optional on every post type. If one is set,
+        // heroImageAlt must also be set for accessibility. Posts without
+        // a heroImage fall back to an ornamental text-only header.
+        if (data.heroImage && !data.heroImageAlt) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: ['heroImageAlt'],
+            message: 'heroImageAlt is required when heroImage is set',
+          });
         }
       }),
 });
