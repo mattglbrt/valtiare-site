@@ -20,12 +20,12 @@ const links = [
     </a>
 
     <nav class="hidden md:block" aria-label="Primary">
-      <ul class="flex items-center gap-8 font-sans text-sm uppercase tracking-[0.15em] text-stone-400">
+      <ul class="flex items-center gap-8 font-sans text-sm uppercase tracking-[0.15em] text-parchment-50">
         {links.map((l) => (
           <li>
             <a
               href={l.href}
-              class="firelit-wordmark no-underline transition hover:text-parchment-50"
+              class="firelit-wordmark no-underline transition hover:text-brass-500"
               style={`animation-duration: ${l.duration}; animation-delay: ${l.delay};`}
             >
               {l.label}
@@ -55,12 +55,12 @@ const links = [
     aria-label="Mobile"
     data-nav-menu
   >
-    <ul class="mx-auto flex max-w-6xl flex-col px-6 py-4 font-sans text-sm uppercase tracking-[0.15em] text-stone-400">
+    <ul class="mx-auto flex max-w-6xl flex-col px-6 py-4 font-sans text-sm uppercase tracking-[0.15em] text-parchment-50">
       {links.map((l) => (
         <li>
           <a
             href={l.href}
-            class="firelit-wordmark block py-3 no-underline transition hover:text-parchment-50"
+            class="firelit-wordmark block py-3 no-underline transition hover:text-brass-500"
             style={`animation-duration: ${l.duration}; animation-delay: ${l.delay};`}
           >
             {l.label}
