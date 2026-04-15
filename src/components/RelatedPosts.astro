@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import OrnamentalDivider from './OrnamentalDivider.astro';
 import { getPublishedPosts } from '../utils/collections';
 
 interface Props {
@@ -58,8 +59,12 @@ const related = all
                 class="aspect-[5/3] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
               />
             ) : (
-              <div class="flex aspect-[5/3] w-full items-center justify-center bg-ink-850 p-4 text-center font-display text-xl italic text-brass-600">
-                {r.data.title}
+              <div class="flex aspect-[5/3] w-full flex-col items-center justify-center gap-3 bg-ink-850 px-4 text-center">
+                <OrnamentalDivider class="w-20 text-brass-700" />
+                <p class="font-sans text-[0.6rem] uppercase tracking-[0.26em] text-stone-500">
+                  {r.data.storyType ? r.data.storyType.replace(/-/g, ' ') : r.data.type === 'lore' ? 'Lore' : 'A story'}
+                </p>
+                <OrnamentalDivider class="w-20 text-brass-700" />
               </div>
             )}
           </div>
