@@ -20,7 +20,8 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://valtiare.com');
-const ogImage = image ? new URL(image, canonical).toString() : null;
+const ogImage = new URL(image ?? '/og-default.svg', canonical).toString();
+const ogImageIsHero = Boolean(image);
 ---
 
 <!doctype html>
@@ -29,7 +30,6 @@ const ogImage = image ? new URL(image, canonical).toString() : null;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.toString()} />
@@ -39,14 +39,11 @@ const ogImage = image ? new URL(image, canonical).toString() : null;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.toString()} />
     <meta property="og:site_name" content="Valtiare" />
-    {ogImage && <meta property="og:image" content={ogImage} />}
-    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content={ogImageIsHero ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    {ogImage && <meta name="twitter:image" content={ogImage} />}
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="twitter:image" content={ogImage} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#0e0d0b" />

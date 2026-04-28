@@ -62,6 +62,7 @@ const structuredData = {
             src={data.heroImage}
             alt={data.heroImageAlt ?? data.title}
             loading="eager"
+            fetchpriority="high"
             widths={[720, 1080, 1440, 1800, 2400]}
             sizes="100vw"
             class="block h-auto w-full max-h-[85vh] object-cover"

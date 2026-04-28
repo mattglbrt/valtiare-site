@@ -45,6 +45,7 @@ const rest = illustrated.filter((p) => p.id !== featured?.id);
               src={featured.data.heroImage}
               alt={featured.data.heroImageAlt ?? featured.data.title}
               loading="eager"
+              fetchpriority="high"
               widths={[720, 1080, 1440, 1800]}
               sizes="(min-width: 1280px) 1152px, 92vw"
               class="block h-auto w-full object-cover transition duration-700 group-hover:scale-[1.015]"
