@@ -1,0 +1,88 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import OrnamentalDivider from '../../components/OrnamentalDivider.astro';
+import Embers from '../../components/Embers.astro';
+import { getArcs, getPostsInArc } from '../../utils/collections';
+
+const arcs = await getArcs();
+const arcsWithCounts = await Promise.all(
+  arcs.map(async (arc) => ({
+    arc,
+    postCount: (await getPostsInArc(arc.id)).length,
+  })),
+);
+
+const statusLabel = {
+  ongoing: 'Ongoing',
+  complete: 'Complete',
+  hiatus: 'On hiatus',
+  unpublished: 'Unpublished',
+};
+---
+
+<BaseLayout
+  title="Arcs — Valtiare"
+  description="The narrative threads stitched through the Valtiare universe."
+>
+  <section class="relative mx-auto max-w-6xl px-6 pt-24 pb-16 text-center">
+    <Embers />
+    <div class="relative">
+      <p class="mb-4 font-sans text-[0.65rem] uppercase tracking-[0.32em] text-stone-500">
+        The Threads
+      </p>
+      <h1 class="heading-rule mx-auto font-display text-5xl md:text-6xl text-parchment-50">
+        Arcs
+      </h1>
+      <p class="mx-auto mt-8 max-w-xl font-serif text-lg italic text-parchment-100/90">
+        Stories that braid together — characters, places, and time, gathered
+        under a single thread.
+      </p>
+      <OrnamentalDivider class="mx-auto mt-10 w-40 text-brass-600" />
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 pb-24">
+    {arcsWithCounts.length === 0 ? (
+      <p class="mx-auto max-w-md text-center font-serif italic text-stone-400">
+        No arcs published yet.
+      </p>
+    ) : (
+      <div class="grid gap-10 md:grid-cols-2">
+        {arcsWithCounts.map(({ arc, postCount }) => (
+          <a href={`/arcs/${arc.id}/`} class="group block no-underline">
+            <div class="relative overflow-hidden border border-brass-700/60 bg-ink-900">
+              {arc.data.coverImage ? (
+                <Image
+                  src={arc.data.coverImage}
+                  alt={arc.data.coverImageAlt ?? arc.data.name}
+                  width={1200}
+                  height={700}
+                  class="aspect-[16/9] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                />
+              ) : (
+                <div class="flex aspect-[16/9] w-full items-center justify-center bg-ink-850 p-10 text-center font-display text-3xl italic text-brass-600">
+                  {arc.data.name}
+                </div>
+              )}
+            </div>
+            <div class="mt-5">
+              <div class="flex items-baseline justify-between gap-4">
+                <p class="font-display text-3xl text-parchment-50 group-hover:text-brass-500">
+                  {arc.data.name}
+                </p>
+                <p class="font-sans text-[0.62rem] uppercase tracking-[0.22em] text-stone-500">
+                  {statusLabel[arc.data.status]} · {postCount}{' '}
+                  {postCount === 1 ? 'entry' : 'entries'}
+                </p>
+              </div>
+              <p class="mt-3 font-serif text-base italic text-stone-400 line-clamp-3">
+                {arc.data.description}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>
