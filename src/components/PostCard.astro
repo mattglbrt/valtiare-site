@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import MediumPill from './MediumPill.astro';
 import OrnamentalDivider from './OrnamentalDivider.astro';
+import LoreCard from './LoreCard.astro';
 
 interface Props {
   post: CollectionEntry<'posts'>;
@@ -69,29 +70,5 @@ const filterAttrs = {
     </div>
   </a>
 ) : (
-  <a
-    href={href}
-    class="group flex flex-col justify-between border border-ink-700/80 bg-ink-900/50 p-6 no-underline transition hover:border-brass-700 hover:bg-ink-850/70"
-    {...filterAttrs}
-  >
-    <div class="flex items-center justify-center py-2">
-      <OrnamentalDivider class="w-32 text-brass-700" />
-    </div>
-
-    <div class="mt-2 text-center">
-      <p class="font-sans text-[0.62rem] uppercase tracking-[0.28em] text-stone-500">
-        Lore
-      </p>
-      <p class={`mt-4 font-display ${size === 'large' ? 'text-3xl' : 'text-2xl'} italic text-parchment-50 group-hover:text-brass-500`}>
-        {data.title}
-      </p>
-      <p class="mt-4 font-serif text-sm italic text-stone-400 line-clamp-4">
-        {data.description}
-      </p>
-    </div>
-
-    <div class="mt-6 flex items-center justify-center py-2">
-      <OrnamentalDivider class="w-32 text-brass-700" />
-    </div>
-  </a>
+  <LoreCard post={post} size={size} filterAttrs={filterAttrs} />
 )}

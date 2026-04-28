@@ -1,0 +1,79 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`column-frame relative mx-auto max-w-[680px] ${className}`}>
+  <div class="column column--left" aria-hidden="true">
+    <img src="/images/ui/columns/column-left-top.svg" alt="" class="column__cap" />
+    <div class="column__shaft"></div>
+    <img src="/images/ui/columns/column-left-base.svg" alt="" class="column__base" />
+  </div>
+
+  <div class="column column--right" aria-hidden="true">
+    <img src="/images/ui/columns/column-left-top.svg" alt="" class="column__cap" />
+    <div class="column__shaft"></div>
+    <img src="/images/ui/columns/column-left-base.svg" alt="" class="column__base" />
+  </div>
+
+  <slot />
+</div>
+
+<style>
+  .column {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    display: none;
+    flex-direction: column;
+    pointer-events: none;
+  }
+
+  .column--left {
+    left: -3.5rem;
+  }
+
+  .column--right {
+    right: -3.5rem;
+    transform: scaleX(-1);
+  }
+
+  .column__cap,
+  .column__base {
+    display: block;
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .column__shaft {
+    flex: 1 1 auto;
+    background-image: url('/images/ui/columns/column-left-mid.svg');
+    background-repeat: repeat-y;
+    background-position: top center;
+    background-size: 32px 80px;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .column {
+      display: flex;
+      opacity: 0.3;
+      width: 24px;
+    }
+    .column__shaft {
+      background-size: 24px 60px;
+    }
+    .column--left { left: -2rem; }
+    .column--right { right: -2rem; }
+  }
+
+  @media (min-width: 1024px) {
+    .column {
+      display: flex;
+      opacity: 0.7;
+    }
+  }
+</style>
