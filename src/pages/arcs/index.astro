@@ -22,7 +22,7 @@ const statusLabel = {
 ---
 
 <BaseLayout
-  title="Arcs — Valtiare"
+  title="Arcs | Valtiare"
   description="The narrative threads stitched through the Valtiare universe."
 >
   <section class="relative mx-auto max-w-6xl px-6 pt-24 pb-16 text-center">
@@ -35,7 +35,7 @@ const statusLabel = {
         Arcs
       </h1>
       <p class="mx-auto mt-8 max-w-xl font-serif text-lg italic text-parchment-100/90">
-        Stories that braid together — characters, places, and time, gathered
+        Stories that braid together. Characters, places, and time, gathered
         under a single thread.
       </p>
       <OrnamentalDivider class="mx-auto mt-10 w-40 text-brass-600" />
@@ -72,7 +72,7 @@ const statusLabel = {
                   {arc.data.name}
                 </p>
                 <p class="font-sans text-[0.62rem] uppercase tracking-[0.22em] text-stone-500">
-                  {statusLabel[arc.data.status]} · {postCount}{' '}
+                  {statusLabel[arc.data.status]} | {postCount}{' '}
                   {postCount === 1 ? 'entry' : 'entries'}
                 </p>
               </div>

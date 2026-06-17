@@ -20,6 +20,7 @@ const { data } = arc;
 const { Content } = await render(arc);
 
 const posts = await getPostsInArc(arc.id);
+const hasBody = Boolean(arc.body?.trim());
 
 const statusLabel = {
   ongoing: 'Ongoing',
@@ -30,7 +31,7 @@ const statusLabel = {
 ---
 
 <BaseLayout
-  title={`${data.name} — Valtiare`}
+  title={`${data.name} | Valtiare`}
   description={data.description}
   image={data.coverImage?.src}
 >
@@ -53,7 +54,7 @@ const statusLabel = {
       <Embers />
       <div class="relative">
         <p class="mb-4 font-sans text-[0.65rem] uppercase tracking-[0.28em] text-stone-500">
-          Arc · {statusLabel}
+          Arc | {statusLabel}
         </p>
         <h1 class="heading-rule mx-auto font-display text-4xl md:text-6xl text-parchment-50">
           {data.name}
@@ -64,12 +65,14 @@ const statusLabel = {
       </div>
     </header>
 
-    <div class="mx-auto mt-16 max-w-[680px] px-6">
-      <div class="prose-body">
-        <Content />
+    {hasBody && (
+      <div class="mx-auto mt-16 max-w-[680px] px-6">
+        <div class="prose-body">
+          <Content />
+        </div>
+        <OrnamentalDivider class="mx-auto mt-16 w-40 text-brass-600" />
       </div>
-      <OrnamentalDivider class="mx-auto mt-16 w-40 text-brass-600" />
-    </div>
+    )}
 
     {posts.length > 0 && (
       <section class="mx-auto mt-12 max-w-6xl px-6 pb-24">

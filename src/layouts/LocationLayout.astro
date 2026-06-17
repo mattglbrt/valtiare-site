@@ -13,15 +13,22 @@ interface Props {
   subLocations: CollectionEntry<'locations'>[];
   associatedCharacters: CollectionEntry<'characters'>[];
   featuredPosts: CollectionEntry<'posts'>[];
+  hasBody: boolean;
 }
 
-const { location, parent, subLocations, associatedCharacters, featuredPosts } =
-  Astro.props;
+const {
+  location,
+  parent,
+  subLocations,
+  associatedCharacters,
+  featuredPosts,
+  hasBody,
+} = Astro.props;
 const { data } = location;
 ---
 
 <BaseLayout
-  title={`${data.name} — Valtiare`}
+  title={`${data.name} | Valtiare`}
   description={data.description}
   image={data.coverImage?.src}
 >
@@ -67,12 +74,14 @@ const { data } = location;
       </div>
     </header>
 
-    <div class="mx-auto mt-16 max-w-[680px] px-6">
-      <div class="prose-body">
-        <slot />
+    {hasBody && (
+      <div class="mx-auto mt-16 max-w-[680px] px-6">
+        <div class="prose-body">
+          <slot />
+        </div>
+        <OrnamentalDivider class="mx-auto mt-16 w-40 text-brass-600" />
       </div>
-      <OrnamentalDivider class="mx-auto mt-16 w-40 text-brass-600" />
-    </div>
+    )}
 
     {subLocations.length > 0 && (
       <section class="mx-auto mt-12 max-w-6xl px-6">

@@ -28,6 +28,7 @@ const associatedCharacters = allCharacters.filter(
 );
 
 const featuredPosts = await getPostsForLocation(location.id);
+const hasBody = Boolean(location.body?.trim());
 ---
 
 <LocationLayout
@@ -36,6 +37,7 @@ const featuredPosts = await getPostsForLocation(location.id);
   subLocations={subLocations}
   associatedCharacters={associatedCharacters}
   featuredPosts={featuredPosts}
+  hasBody={hasBody}
 >
   <Content />
 </LocationLayout>
